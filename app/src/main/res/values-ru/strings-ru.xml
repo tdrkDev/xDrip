@@ -163,6 +163,8 @@
     <string name="checking_for_update">Проверка наличия обновлений...</string>
     <string name="signal_missed">Пропущенные показания</string>
     <string name="minutes_ago">{0, choice,0#{0, number, integer} Минут назад|1#{0, number, integer} Минуту назад|1&lt;{0, number, integer} Минуты назад}</string>
+    <string name="expires_days">{0, choice,0#Сенсор закончился!|1#Заканчивается через {0, number} день|1&lt;Заканчивается через {0, number} дн.}</string>
+    <string name="expires_at">Заканчивается в {0}</string>
     <string name="space_minutes_ago">" Мин. назад"</string>
     <string name="space_minute_ago">" Минуту назад"</string>
     <string name="show_parakeet_map">Показать карту Parekeet</string>

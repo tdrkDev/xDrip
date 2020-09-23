@@ -23,8 +23,9 @@
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="@string/range_in_high_low"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -46,8 +47,9 @@
                 android:layout_gravity="center_horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:padding="5dp"
                     android:text="@string/absolute_s"
                     android:textAppearance="?android:attr/textAppearanceLarge" />

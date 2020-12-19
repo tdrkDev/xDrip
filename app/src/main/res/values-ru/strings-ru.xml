@@ -1551,4 +1551,17 @@
     <string name="pref_ringtone_silent">Тихий</string>
     <string name="pref_title_ringtone">Мелодия</string>
     <string name="pref_title_vibrate">Вибрация</string>
+    <string name="carbs_per_unit">Углеводов на ЕД</string>
+    <string name="xdrip_oop2_not_installed">xDrip+ требуется OOP2 для работы с сенсорами Libre2/Libre2 US</string>
+    <string name="enable_streaming_summary">Подключаться к сенсорам Libre2 после их сканирования. Это не даст ридеру Libre и LibreLink получать сигналы</string>
+    <string name="enable_streaming_ask_each_time">Спрашивать каждый раз</string>
+    <string name="enable_streaming_never">Никогда не подключаться к сенсорам Libre2</string>
+    <string name="enable_streaming_dialog_yes">Подключиться к этому сенсору Libre2</string>
+    <string name="enable_streaming_dialog_no">Не подключаться к этому сенсору Libre2</string>
+    <string name="enable_streaming_dialog_dont_ask_again">Больше не спрашивать</string>
+    <string name="enable_streaming_dialog_title">Подключение сенсора Libre через Bluetooth</string>
+    <string name="enable_streaming_dialog_text">Вы действительно хотите соединить xDrip+ с этим сенсором? Это не даст ридеру Libre и LibreLink получать сигналы. Нажмите \"да\" и сканируйте сенсор снова, чтобы подключиться (выберите \"не подключаться\", если вы хотите использовать xDrip+ с пропатченным приложением)</string>
+    <string name="blood_glucose_graph">График глюкозы крови</string>
+    <string name="enable_streaming_always_allow">Всегда подключаться к сенсорам Libre2</string>
+    <string name="enable_streaming_title">Запуск Bluetooth-соединения с сенсорами Libre2</string>
 </resources>

@@ -319,6 +319,7 @@
     <string name="speak_your_treatment">Произнесите запись терапии, напр.: x.x единиц инсулина / xx граммов углеводов</string>
     <string name="speech_recognition_is_not_supported">Распознавание речи не поддерживается</string>
     <string name="treatment_note">Заметка к событию терапии</string>
+    <string name="accessibility_description">xDrip использует Специальные возможности только для настройки экрана, когда устройство заблокировано. Это, вероятно, будет полезно, только если ваш смартфон поддерживает функцию Always On Display и она включена. xDrip не взаимодействует с Android никакими другими способами.</string>
     <string name="could_not_export_database">Не удалось экспортировать базу данных :(</string>
     <string name="exported_to">Экспортировано в</string>
     <string name="default_to_voice_input_next_time">Сразу голосовой ввод в следующий раз</string>

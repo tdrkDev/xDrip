@@ -1194,7 +1194,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Synchroniseer gegevens met MiBand-fitnessbanden</string>
     <string name="title_miband_enable">MiBand band gebruiken</string>
-    <string name="title_miband_screens_features">MiBand-schermen / functies</string>
     <string name="title_miband_screen_battery">Toon batterij</string>
     <string name="title_miband_show_date">Datum op het scherm weergeven</string>
     <string name="title_miband_visibility">MiBand zichtbaarheid</string>
@@ -1221,8 +1220,6 @@
     <string name="title_miband_send_readings_as_notification">BG-waarden als melding</string>
     <string name="summary_miband_send_readings_as_notification">Zal een melding gebruiken om BG-metingen te verzenden.  De datum zou niet worden gewijzigd, dus alle bandfuncties kunnen worden gebruikt.  Moet uitgeschakeld worden als u xdrip-wijzerplaat wilt gebruiken (het is vereist om de officiële MiFit-applicatie te verwijderen om datumoverschrijvingen te voorkomen)</string>
     <string name="title_miband_vibrate_on_readings">Trillen bij metingen</string>
-    <string name="title_miband_send_calls">Stuur oproepen</string>
-    <string name="summary_miband_send_calls">Stuur oproepmeldingen naar de band (Android 6+)</string>
     <string name="title_miband_graph_category">Grafiekopties</string>
     <string name="title_miband_graph_enable">Grafiek inschakelen</string>
     <string name="title_miband_graph_treatment_enable">Bolus weergeven</string>

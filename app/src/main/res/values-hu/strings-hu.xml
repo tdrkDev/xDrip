@@ -1167,7 +1167,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Adatok szinkronizálása MiBand-del</string>
     <string name="title_miband_enable">MiBand használata</string>
-    <string name="title_miband_screens_features">MiBand képernyő beállítások</string>
     <string name="title_miband_screen_battery">Töltöttség muitatása</string>
     <string name="title_miband_show_date">Dátum mutatása a képernyőn</string>
     <string name="title_miband_visibility">MiBand láthatósága</string>
@@ -1195,8 +1194,6 @@
     <string name="summary_miband_send_readings_as_notification">Értesítések használata a VC-értékek küldésére. Minden más funkcióval együtt is használható.
         Ne engedélyezze, ha xDrip óralapot használ. (A MiFit alkalmazás törlése szükséges a felülírás elkerülése érdekében.)</string>
     <string name="title_miband_vibrate_on_readings">Rezgés VC-érték küldésekor</string>
-    <string name="title_miband_send_calls">Hívások átküldése</string>
-    <string name="summary_miband_send_calls">Hívás értesítések küldése MiBand-re</string>
     <string name="title_miband_graph_category">Grafikon beállítások</string>
     <string name="title_miband_graph_enable">Grafikon mutatása</string>
     <string name="title_miband_graph_treatment_enable">Bólus mutatása</string>

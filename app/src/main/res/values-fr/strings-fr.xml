@@ -1194,7 +1194,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Synchroniser les données avec les bracelets de fitness MiBand</string>
     <string name="title_miband_enable">Utiliser le bracelet MiBand</string>
-    <string name="title_miband_screens_features">Fonctionnalités / Écrans MiBand</string>
     <string name="title_miband_screen_battery">Afficher la batterie</string>
     <string name="title_miband_show_date">Afficher la date sur l\'écran</string>
     <string name="title_miband_visibility">Visibilité MiBand</string>
@@ -1222,8 +1221,6 @@
     <string name="summary_miband_send_readings_as_notification">Utilisera une notification pour envoyer des lectures de glycémies. La date ne serait pas modifiée afin que toutes les fonctionnalités du bracelet puissent être utilisées.
         Besoin de désactiver si vous voulez utiliser xdrip watchface(Il est nécessaire de supprimer l\'application MiFit officielle pour éviter les remplacements de dates)</string>
     <string name="title_miband_vibrate_on_readings">Vibrer lors des lectures</string>
-    <string name="title_miband_send_calls">Envoyer les appels</string>
-    <string name="summary_miband_send_calls">Envoyer des notifications d\'appel au bracelet (Android 6+)</string>
     <string name="title_miband_graph_category">Options du graphique</string>
     <string name="title_miband_graph_enable">Activer le graphique</string>
     <string name="title_miband_graph_treatment_enable">Afficher le bolus</string>

@@ -1195,7 +1195,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Sincronizar datos con las pulseras de actividad MiBand</string>
     <string name="title_miband_enable">Usar MiBand</string>
-    <string name="title_miband_screens_features">Características/pantallas MiBand</string>
     <string name="title_miband_screen_battery">Mostrar Batería</string>
     <string name="title_miband_show_date">Mostrar fecha en la pantalla</string>
     <string name="title_miband_visibility">Visibilidad de MiBand</string>
@@ -1223,8 +1222,6 @@
     <string name="summary_miband_send_readings_as_notification">Se usará una notificación para enviar lecturas de glucemia. La fecha no se cambiará para poder utilizar todas las funciones de la pulsera
         Debe deshabilitar si desea usar la esfera de xDrip (requerirá la aplicación oficial MiFit para evitar sobrescribir la fecha)</string>
     <string name="title_miband_vibrate_on_readings">Vibrar en lecturas</string>
-    <string name="title_miband_send_calls">Enviar Llamadas</string>
-    <string name="summary_miband_send_calls">Enviar notificaciones de llamada a la pulsera (Android 6+)</string>
     <string name="title_miband_graph_category">Opciones del gráfico</string>
     <string name="title_miband_graph_enable">Habilitar gráfico</string>
     <string name="title_miband_graph_treatment_enable">Mostrar bolo</string>

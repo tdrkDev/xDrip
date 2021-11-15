@@ -1194,7 +1194,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Надсилати дані на MiBand</string>
     <string name="title_miband_enable">Інтеграція з MiBand</string>
-    <string name="title_miband_screens_features">Екрани/Функції MiBand</string>
     <string name="title_miband_screen_battery">Відображати заряд</string>
     <string name="title_miband_show_date">Відображати дату на екрані</string>
     <string name="title_miband_visibility">Видимість MiBand</string>
@@ -1221,8 +1220,6 @@
     <string name="title_miband_send_readings_as_notification">Сповіщення про глюкозу</string>
     <string name="summary_miband_send_readings_as_notification">Надсилати сповіщення на браслет зі значеннями глюкози. Дата не буде змінена так що всі функції браслета можуть бути використані. Вимкніть якщо хочете використовувати циферблат xDrip+ (необхідно видалити офіційний додаток MiFit щоб уникнути зміни дати)</string>
     <string name="title_miband_vibrate_on_readings">Вібрація при нових значеннях</string>
-    <string name="title_miband_send_calls">Сповіщення про дзвінки</string>
-    <string name="summary_miband_send_calls">Надсилати сповіщення про дзвінки на браслет (Android 6+)</string>
     <string name="title_miband_graph_category">Налаштувати графік</string>
     <string name="title_miband_graph_enable">Відображати графік</string>
     <string name="title_miband_graph_treatment_enable">Відображати болюс</string>

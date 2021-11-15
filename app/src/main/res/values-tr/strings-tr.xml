@@ -1197,7 +1197,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">MiBand veri senkronizasyonu</string>
     <string name="title_miband_enable">MiBand Bileklik Kullan</string>
-    <string name="title_miband_screens_features">Miband Ekranları / Özellikleri</string>
     <string name="title_miband_screen_battery">Pil durumunu göster</string>
     <string name="title_miband_show_date">Ekranda tarihi göster</string>
     <string name="title_miband_visibility">MiBand görünürlüğü</string>
@@ -1224,8 +1223,6 @@
     <string name="title_miband_send_readings_as_notification">KŞ değerlerini bildirim olarak alma</string>
     <string name="summary_miband_send_readings_as_notification">KŞ değerlerini mibandınıza bildirim olarak alırsınız. Tüm miband özelliklerinin kullanılması için tarih değiştirilmeyecektir. xDrip saatarayüzü\'nü kullanabilmeniz için bu seçeneği kapalı yapın. (Tarih hatası nedeniyle bildirim alamama ihtimaline karşı resmi mifit uygulamasının kaldırılması gerekir.)</string>
     <string name="title_miband_vibrate_on_readings">Okumalarda titreşimle uyar</string>
-    <string name="title_miband_send_calls">Çağrıları Gönder</string>
-    <string name="summary_miband_send_calls">Çağrı bildirimlerini mibanda gönderir (Android 6+)</string>
     <string name="title_miband_graph_category">Grafik Seçenekleri</string>
     <string name="title_miband_graph_enable">Grafiği etkinleştir</string>
     <string name="title_miband_graph_treatment_enable">Bolusu Göster</string>

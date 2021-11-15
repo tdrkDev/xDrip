@@ -1156,7 +1156,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">סינכרון נתונים עם צמידי כושר MiBand</string>
     <string name="title_miband_enable">השתמש בצמיד MiBand</string>
-    <string name="title_miband_screens_features">מסכים\\תכונות של MiBand </string>
     <string name="title_miband_screen_battery">הצג את הסוללה</string>
     <string name="title_miband_show_date">הצג את התאריך על המסך</string>
     <string name="title_miband_visibility">ראות MiBand</string>

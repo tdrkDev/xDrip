@@ -974,7 +974,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Zobrazovať hodnoty na fitness náramkoch MiBand</string>
     <string name="title_miband_enable">Použiť náramok MiBand</string>
-    <string name="title_miband_screens_features">MiBand obrazovky / funkcie</string>
     <string name="title_miband_screen_battery">Zobrazovať batériu</string>
     <string name="title_miband_show_date">Zobrazovať dátum</string>
     <string name="title_miband_visibility">Viditeľnosť MiBand</string>

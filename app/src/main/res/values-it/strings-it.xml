@@ -1195,7 +1195,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Sincronizza i dati con fitness band MiBand</string>
     <string name="title_miband_enable">Usa MiBand</string>
-    <string name="title_miband_screens_features">Schermate MiBand / Caratteristiche</string>
     <string name="title_miband_screen_battery">Visualizza Batteria</string>
     <string name="title_miband_show_date">Visualizza data sullo schermo</string>
     <string name="title_miband_visibility">Visibilità MiBand</string>
@@ -1223,8 +1222,6 @@
     <string name="summary_miband_send_readings_as_notification">Userà le notifiche per inviare le letture di glicemia. La data non verrà cambiata in modo da poter utilizzare tutte le funzionalità della banda.
         Va disabilitato se si desidera utilizzare il quadrante xDrip+ (È necessario eliminare l\'applicazione ufficiale MiFit per evitare sovrascrittura dati)</string>
     <string name="title_miband_vibrate_on_readings">Vibra alle letture</string>
-    <string name="title_miband_send_calls">Invia Chiamate</string>
-    <string name="summary_miband_send_calls">Invia notifiche di chiamata alla band (Android 6+)</string>
     <string name="title_miband_graph_category">Opzioni grafico</string>
     <string name="title_miband_graph_enable">Abilita grafico</string>
     <string name="title_miband_graph_treatment_enable">Visualizza bolo</string>

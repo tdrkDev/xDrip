@@ -1191,7 +1191,6 @@
     <string name="title_miband">小米手环</string>
     <string name="summary_miband_enable">与小米手环同步数据</string>
     <string name="title_miband_enable">使用小米手环</string>
-    <string name="title_miband_screens_features">小米手环显示/功能</string>
     <string name="title_miband_screen_battery">显示电池水平</string>
     <string name="title_miband_show_date">在屏幕上显示日期</string>
     <string name="title_miband_visibility">使小米手环搜索可见</string>
@@ -1211,7 +1210,6 @@
     <string name="title_miband_colect_heartrate">收集心率数据</string>
     <string name="summary_miband_colect_heartrate">将从手环收集心率数据。更新间隔可以在 MiFit 或任何第三方应用程序中配置</string>
     <string name="title_miband_authkey">认证密钥</string>
-    <string name="summary_miband_send_calls">发送电话提醒到手环 (Android 6+)</string>
     <string name="title_miband_graph_treatment_enable">显示药剂</string>
     <string name="title_lefun_band">Lefun智能手表</string>
     <string name="summary_lefun_enable">同步数据到LeFun健身</string>

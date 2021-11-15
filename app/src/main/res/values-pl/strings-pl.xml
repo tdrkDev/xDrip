@@ -1152,7 +1152,6 @@
     <string name="send_bg_readings_to_backfill">Wyślij odczyty glikemii do uzupełnienia</string>
     <string name="title_miband">MiBand</string>
     <string name="title_miband_enable">Użyj opaski MiBand</string>
-    <string name="title_miband_screens_features">Ekrany i funkcje MiBand</string>
     <string name="title_miband_screen_battery">Pokaż stan baterii</string>
     <string name="title_miband_show_date">Pokaż datę na ekranie</string>
     <string name="title_miband_visibility">Widoczność MiBand</string>

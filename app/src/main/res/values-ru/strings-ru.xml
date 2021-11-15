@@ -1195,7 +1195,6 @@
     <string name="title_miband">Mi Band</string>
     <string name="summary_miband_enable">Синхронизировать данные с фитнес-браслетами Mi Band</string>
     <string name="title_miband_enable">Использовать браслет Mi Band</string>
-    <string name="title_miband_screens_features">Экраны/функции Mi Band</string>
     <string name="title_miband_screen_battery">Показывать батарею</string>
     <string name="title_miband_show_date">Показывать дату на экране</string>
     <string name="title_miband_visibility">Видимость Mi Band</string>
@@ -1227,8 +1226,6 @@
     <string name="title_miband_send_readings_as_notification">Показания ГК как уведомление</string>
     <string name="summary_miband_send_readings_as_notification">Будет использовать уведомления для отправки показаний ГК. Дата не будет меняться, поэтому все функции браслета можно использовать. Нужно выключить, если вы хотите использовать циферблат xDrip (необходимо удалить официальное приложение Mi Fit, чтобы предотвратить перезапись даты)</string>
     <string name="title_miband_vibrate_on_readings">Вибрировать при показаниях</string>
-    <string name="title_miband_send_calls">Отправлять вызовы</string>
-    <string name="summary_miband_send_calls">Отправлять уведомления вызовов на браслет (Android 6+)</string>
     <string name="title_miband_graph_category">Настройки графика</string>
     <string name="title_miband_graph_enable">Включить график</string>
     <string name="title_miband_graph_treatment_enable">Показывать болюсы</string>

@@ -1193,7 +1193,6 @@
     <string name="title_miband">MiBand</string>
     <string name="summary_miband_enable">Sincronizare date cu benzile de fitness MiBand</string>
     <string name="title_miband_enable">Folosește banda MiBand</string>
-    <string name="title_miband_screens_features">Ecrane MiBand / Caracteristici</string>
     <string name="title_miband_screen_battery">Arată bateria</string>
     <string name="title_miband_show_date">Arată data pe ecran</string>
     <string name="title_miband_visibility">Vizibilitate MiBand</string>
@@ -1221,8 +1220,6 @@
     <string name="summary_miband_send_readings_as_notification">Va utiliza o notificare pentru a trimite valorile de glicemie. Data nu va fi schimbată astfel încât toate caracteristicile brățării pot fi utilizate.
         Trebuie să dezactivezi dacă vrei să folosești xDrip ca ecran principal pe ceas (Este necesar să ștergi aplicația oficială MiFit pentru a evita suprascrierea datelor)</string>
     <string name="title_miband_vibrate_on_readings">Vibrează la citiri</string>
-    <string name="title_miband_send_calls">Trimite apeluri</string>
-    <string name="summary_miband_send_calls">Trimite notificări tip apel către brățară (Android 6+)</string>
     <string name="title_miband_graph_category">Opțiuni grafic</string>
     <string name="title_miband_graph_enable">Activare grafic</string>
     <string name="title_miband_graph_treatment_enable">Arată bolus</string>

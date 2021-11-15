@@ -192,6 +192,10 @@ public class JoH {
         return (tsl() - when);
     }
 
+    public static long msSince(long end, long start) {
+        return (end - start);
+    }
+
     public static long msTill(long when) {
         return (when - tsl());
     }
@@ -1517,6 +1521,16 @@ public class JoH {
         return false;
     }
 
+    public static boolean isBluetoothEnabled(final Context context) {
+        try {
+            final BluetoothManager bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
+            final BluetoothAdapter mBluetoothAdapter = bluetoothManager.getAdapter(); // local scope only
+            return mBluetoothAdapter.isEnabled();
+        } catch (Exception e) {
+            UserError.Log.d(TAG, "isBluetoothEnabled() exception: " + e);
+        }
+        return false;
+    }
 
     public synchronized static void setBluetoothEnabled(Context context, boolean state) {
         try {

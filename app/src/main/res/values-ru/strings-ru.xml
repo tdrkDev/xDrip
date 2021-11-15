@@ -1158,8 +1158,8 @@
     <string name="manual_overwrite_not_possible">Ручная перезапись невозможна!</string>
     <string name="upload_even_when_using_mobile_data">Отправлять даже при использовании мобильных данных</string>
     <string name="use_mobile_data">Использовать мобильные данные</string>
-    <string name="summary_cloud_storage_api_download_enable">Также пытаться загрузить данные из Nightscout</string>
-    <string name="title_cloud_storage_api_download_enable">Загружать данные</string>
+    <string name="summary_cloud_storage_api_download_enable">Также пытаться загружать события терапии из Nightscout</string>
+    <string name="title_cloud_storage_api_download_enable">Загружать терапию</string>
     <string name="summary_bluetooth_meter_for_calibrations_auto">Калибровать, используя новые измерения глюкозы крови, если условия выглядят подходящими для этого, без подтверждения (экспериментально)</string>
     <string name="title_bluetooth_meter_for_calibrations_auto">Автоматическая калибровка</string>
     <string name="title_rest_api_extra_options">Дополнительные настройки</string>
@@ -1351,7 +1351,7 @@
     <string name="summary_show_home_on_boot">Показывать экран xDrip автоматически после запуска устройства</string>
     <string name="title_show_home_on_boot">Показывать xDrip при включении</string>
     <string name="eula">EULA</string>
-    <string name="summary_plus_accept_follower_actions">События терапии и калибровки от фолловеров будут приняты</string>
+    <string name="summary_plus_accept_follower_actions">События терапии, калибровки и другие действия от фолловеров будут приняты</string>
     <string name="title_plus_accept_follower_actions">Принимать действия фолловера</string>
     <string name="summary_plus_whole_house">Участвовать в сети всего дома</string>
     <string name="title_plus_whole_house">Весь дом</string>
@@ -1578,4 +1578,6 @@
     <string name="enable_streaming_dialog_title">Подключение сенсора Libre к Bluetooth</string>
     <string name="title_lower_fuzzer">Уменьшенный FUZZER</string>
     <string name="summary_lower_fuzzer">Уменьшить значение Fuzzer с 2.5 минут до 37.5 секунд</string>
+    <string name="summary_send_dexcom_transmitter_battery_to_nightscout">Отправлять статистику батареи трансмиттера Dexcom в Nightscout. Включает все данные, отображаемые на экране Состояние коллектора.</string>
+    <string name="title_send_dexcom_transmitter_battery_to_nightscout">Отправлять уровень батареи трансмиттера OB1G5/G6</string>
 </resources>

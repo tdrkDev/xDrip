@@ -467,6 +467,7 @@
     <string name="start_sensor">Запустить сенсор</string>
     <string name="debug_and_other_misc_options">Отладка и другие настройки</string>
     <string name="low_glucose_values">Низкие значения глюкозы</string>
+    <string name="bad_glucose_values">Неверные значения глюкозы</string>
     <string name="revert_to_default">Вернуть к стандартному</string>
     <string name="filtered_values">Сглаженные значения</string>
     <string name="treatment_color">Цвет события терапии</string>
@@ -1165,6 +1166,8 @@
     <string name="title_rest_api_extra_options">Дополнительные настройки</string>
     <string name="summary_send_bridge_battery_to_nightscout">Отправлять уровень батареи вашего передатчика в Nightscout. Отключите, если ваш датчик батареи сломан.</string>
     <string name="title_send_bridge_battery_to_nightscout">Отправлять батарею передатчика</string>
+    <string name="summary_send_dexcom_transmitter_battery_to_nightscout">Отправлять статистику батареи трансмиттера Dexcom в Nightscout. Включает все данные, отображаемые на экране Состояние коллектора.</string>
+    <string name="title_send_dexcom_transmitter_battery_to_nightscout">Отправлять уровень батареи трансмиттера OB1G5/G6</string>
     <string name="summary_send_treatments_to_nightscout">Отправлять данные терапии в Nightscout. Отключите, если ваш портал терапии сломан.</string>
     <string name="title_send_treatments_to_nightscout">Отправлять события терапии</string>
     <string name="summary_warn_nightscout_failures">Отображать уведомление со звуком, если загрузка в Nightscout не удалась.</string>
@@ -1383,7 +1386,7 @@
     <string name="summary_pendiq_screen">Чтение и запись доз</string>
     <string name="title_pendiq_screen">Шприц-ручка Pendiq 2.0</string>
     <string name="title_use_pendiq">Поддержка Pendiq 2.0</string>
-    <string name="summary_pendiq_send_treatments">Подготовить ручку с введенными единицами инсулина. Вы всегда должны дважды проверять это.</string>
+    <string name="summary_pendiq_send_treatments">Подготовить ручку записанными единицами инсулина. Вы всегда должны дважды проверять это.</string>
     <string name="title_pendiq_send_treatments">Отправлять события терапии на ручку</string>
     <string name="title_pendiq_pin">Пин-код ручки</string>
     <string name="summary_use_notification_channels">Использовать функцию каналов уведомлений Android 8+</string>
@@ -1392,6 +1395,8 @@
     <string name="title_ongoing_notification_channel">Использовать канал постоянного уведомления</string>
     <string name="summary_notification_channels_grouping">Должны ли уведомления быть сгруппированы вместе. Несовместимо с настройкой \'Число на панели уведомлений\'</string>
     <string name="title_notification_channels_grouping">Группировать уведомления вместе</string>
+    <string name="summary_delay_ascending_3min">Для профиля возрастающей громкости задерживать начало звука тревоги на 3 мин. Вибрация (если включена) начнется сразу при срабатывании тревоги вне зависимости от этой настройки.</string>
+    <string name="title_delay_ascending_3min">Задержать возрастание громкости</string>
     <string name="summary_play_sound_for_initial_calibration">Проигрывать звук, когда запрошена начальная калибровка</string>
     <string name="title_play_sound_for_initial_calibration">Уведомление о начальной</string>
     <string name="category_noisy_readings">Шумные значения</string>
@@ -1578,6 +1583,18 @@
     <string name="enable_streaming_dialog_title">Подключение сенсора Libre к Bluetooth</string>
     <string name="title_lower_fuzzer">Уменьшенный FUZZER</string>
     <string name="summary_lower_fuzzer">Уменьшить значение Fuzzer с 2.5 минут до 37.5 секунд</string>
-    <string name="summary_send_dexcom_transmitter_battery_to_nightscout">Отправлять статистику батареи трансмиттера Dexcom в Nightscout. Включает все данные, отображаемые на экране Состояние коллектора.</string>
-    <string name="title_send_dexcom_transmitter_battery_to_nightscout">Отправлять уровень батареи трансмиттера OB1G5/G6</string>
+    <string name="without_camera_permission_cannot_scan_barcode">Без разрешения на камеру мы не можем сканировать штрихкод</string>
+    <string name="summary_create_missing_filtered">По мере необходимости создавать сглаженные данные</string>
+    <string name="title_create_missing_filtered">Сглаживать пропущенные данные</string>
+    <string name="summary_widget_hide_graph">Скрыть график на виджетах (отображается при следующем показании)</string>
+    <string name="title_widget_hide_graph">Скрыть график виджета</string>
+    <string name="summary_illustrate_remote_data">Показывать данные, полученные удаленно (только для диагностики)</string>
+    <string name="title_illustrate_remote_data">Отображать удаленные данные</string>
+    <string name="summary_show_accessibility_settings">Если ваш телефон имеет опцию Always On Display, вы можете включить виджет xDrip+ там, включив службу специальных возможностей xDrip на странице настроек Android.</string>
+    <string name="title_show_accessibility_settings">Включить специальные возможности xDrip+</string>
+    <string name="title_multiple_insulin_types_settings">Несколько типов инсулина</string>
+    <string name="summary_multiple_insulin_types_settings">Настройки работы с несколькими типами инсулина</string>
+    <string name="title_multiple_insulin_types">Несколько типов инсулина</string>
+    <string name="external_status_strings_eg_tbr">Внешние строки состояний, напр. ВБС из AAPS</string>
+    <string name="accept_external_status">Принимать состояния извне</string>
 </resources>

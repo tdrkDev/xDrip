@@ -6,15 +6,9 @@ configurations.all {
     }
 }
 
-ext.generateVersionNumber = { ->
-    StringBuilder stringBuilder = new StringBuilder()
-    stringBuilder.append((new Date()).format('yyMMddHHmm'))
-    return Integer.parseInt(stringBuilder.toString())
-}
-
 ext.generateVersionNumberString = { ->
     StringBuilder stringBuilder = new StringBuilder()
-    stringBuilder.append((new Date()).format('yyMMddHHmm'))
+    stringBuilder.append((new Date()).format('21yyMMddHH'))
     return stringBuilder.toString()
 }
 

@@ -246,7 +246,7 @@ public class Treatments extends Model {
         // if treatment more than 1 minutes in the future
         final long future_seconds = (timestamp - JoH.tsl()) / 1000;
         if (future_seconds > (60 * 60)) {
-            JoH.static_toast_long("Refusing to create a treatement more than 1 hours in the future!");
+            JoH.static_toast_long(xdrip.getAppContext().getString(R.string.refusing_to_create_a_treatment_more_than_1_hours_in_the_future));
             return null;
         }
         if ((future_seconds > 60) && (future_seconds < 86400) && ((carbs > 0) || (insulinSum > 0))) {

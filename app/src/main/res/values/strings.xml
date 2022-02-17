@@ -1680,4 +1680,15 @@
     <string name="accept_external_status">Accept External Status</string>
     <string translatable="false" name="summary_dex_specified_slot">Specify transmitter slot manually, setting this incorrectly will prevent any readings being received.</string>
     <string translatable="false" name="title_dex_specified_slot">Manual Slot Number</string>
+    <string name="received_remote_snooze">Received remote snooze!</string>
+    <string name="could_not_create_calibration">Could not create calibration!</string>
+    <string name="calibration_out_of_range_mgdl">Calibration out of range: %s mg/dl</string>
+    <string name="bloodtest_out_of_range_mgdl">Bloodtest out of range: %s mg/dl</string>
+    <string name="need_permission_for_saved_files">Need permission for saved files</string>
+    <string name="stopping_sensor_due_to_serial_number_change">Stopping sensor due to serial number change</string>
+    <string name="sensor_raw_data_sanity_failure">Sensor Raw Data Sanity Failure:</string>
+    <string name="refusing_to_create_a_treatment_more_than_1_hours_in_the_future">Refusing to create a treatment more than 1 hours in the future!</string>
+    <string name="could_not_find_miband_try_again">Could not find MiBand, please try again</string>
+    <string name="wrong_mi_band_authorization_key_recheck">Wrong miband authorization key, please recheck a key and try to reconnect again</string>
+    <string name="calibration_sent_to_master_for_processing">Calibration sent to master for processing</string>
 </resources>

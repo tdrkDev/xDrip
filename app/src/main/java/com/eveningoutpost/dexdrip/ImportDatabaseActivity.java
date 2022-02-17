@@ -71,7 +71,7 @@ public class ImportDatabaseActivity extends ListActivityWithMenu {
             sortDatabasesAlphabetically();
             showDatabasesInList();
         } else if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            JoH.static_toast_long("Need permission for saved files");
+            JoH.static_toast_long(getString(R.string.need_permission_for_saved_files));
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_STORAGE);

@@ -77,7 +77,7 @@ public class CalibrationOverride extends ActivityWithMenu {
 
                             } else {
                                 Log.e(TAG, "Calibration creation resulted in null");
-                                JoH.static_toast_long("Could not create calibration!");
+                                JoH.static_toast_long(getString(R.string.could_not_create_calibration));
                             }
                             Intent tableIntent = new Intent(v.getContext(), Home.class);
                             startActivity(tableIntent);

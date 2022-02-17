@@ -439,7 +439,7 @@ public class GcmListenerSvc extends JamListenerSvc {
                                         if (JoH.pratelimit("received-remote-snooze", 30)) {
                                             AlertPlayer.getPlayer().Snooze(xdrip.getAppContext(), -1, false);
                                             UserError.Log.ueh(TAG, "Accepted remote snooze");
-                                            JoH.static_toast_long("Received remote snooze!");
+                                            JoH.static_toast_long(getString(R.string.received_remote_snooze));
                                         } else {
                                             Log.e(TAG, "Rate limited remote snooze");
                                         }

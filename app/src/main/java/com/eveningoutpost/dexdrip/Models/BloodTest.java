@@ -12,6 +12,7 @@ import com.activeandroid.util.SQLiteUtils;
 import com.eveningoutpost.dexdrip.AddCalibration;
 import com.eveningoutpost.dexdrip.GlucoseMeter.GlucoseReadingRx;
 import com.eveningoutpost.dexdrip.Home;
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.Services.SyncService;
 import com.eveningoutpost.dexdrip.UtilityModels.BgGraphBuilder;
 import com.eveningoutpost.dexdrip.UtilityModels.Constants;
@@ -193,7 +194,7 @@ public class BloodTest extends Model {
 
         if ((bg < 40) || (bg > 400)) {
             Log.wtf(TAG, "Invalid out of range bloodtest glucose mg/dl value of: " + bg);
-            JoH.static_toast_long("Bloodtest out of range: " + bg + " mg/dl");
+            JoH.static_toast_long(xdrip.getAppContext().getString(R.string.bloodtest_out_of_range_mgdl, Double.toString(bg)));
             return null;
         }
 

@@ -2,9 +2,11 @@ package com.eveningoutpost.dexdrip.Models;
 
 import com.eveningoutpost.dexdrip.Home;
 import com.eveningoutpost.dexdrip.Models.UserError.Log;
+import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.UtilityModels.PersistentStore;
 import com.eveningoutpost.dexdrip.UtilityModels.Pref;
 import com.eveningoutpost.dexdrip.utils.DexCollectionType;
+import com.eveningoutpost.dexdrip.xdrip;
 
 /**
  * Created by jamorham on 02/03/2018.
@@ -73,7 +75,7 @@ public class SensorSanity {
 
         if (!state) {
             if (JoH.ratelimit("sanity-failure", 20)) {
-                final String msg = "Sensor Raw Data Sanity Failure: " + raw_value;
+                final String msg = xdrip.getAppContext().getString(R.string.sensor_raw_data_sanity_failure) + " " + raw_value;
                 UserError.Log.e(TAG, msg);
                 JoH.static_toast_long(msg);
             }
@@ -154,7 +156,7 @@ public class SensorSanity {
                 // We need to stop the sensor.
                 Log.e(TAG, String.format("Different sensor serial number for same sensor uuid: %s :: %s vs %s", last_uuid, lastSn, currentSerial));
                 Sensor.stopSensor();
-                JoH.static_toast_long("Stopping sensor due to serial number change");
+                JoH.static_toast_long(xdrip.getAppContext().getString(R.string.stopping_sensor_due_to_serial_number_change));
                 // There is no open sensor now.
                 PersistentStore.setString(PREF_LIBRE_SENSOR_UUID, "");
                 PersistentStore.setString(PREF_LIBRE_SN, "");

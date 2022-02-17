@@ -861,7 +861,7 @@ public class MiBandService extends JamBaseBluetoothSequencer {
                     authKey = AuthMessages.getAuthCodeFromFilesSystem(MiBand.getMac());
                 }
                 if (!AuthMessages.isValidAuthKey(authKey)) {
-                    JoH.static_toast_long("Wrong miband authorization key, please recheck a key and try to reconnect again");
+                    JoH.static_toast_long(getString(R.string.wrong_mi_band_authorization_key_recheck));
                     changeState(AUTHORIZE_FAILED);
                     return;
                 } else {

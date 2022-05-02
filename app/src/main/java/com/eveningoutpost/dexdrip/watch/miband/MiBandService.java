@@ -8,10 +8,6 @@ import android.bluetooth.BluetoothGattService;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.PowerManager;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
@@ -132,7 +128,7 @@ public class MiBandService extends JamBaseBluetoothSequencer {
     private boolean isNightMode = false;
     private FirmwareOperations firmware;
     private Subscription watchfaceSubscription;
-    private MediaPlayer player;
+
     private PendingIntent bgServiceIntent;
     private MiBandType prevDeviceType = MiBandType.UNKNOWN;
     private QueueMessage queueItem;
@@ -559,13 +555,13 @@ public class MiBandService extends JamBaseBluetoothSequencer {
             case DeviceEvent.FIND_PHONE_START:
                 UserError.Log.d(TAG, "find phone started");
                 if ((JoH.ratelimit("band_find phone_sound", 3))) {
-                    player = JoH.playSoundUri(getResourceURI(R.raw.default_alert));
+                    JoH.playSoundUri(getResourceURI(R.raw.default_alert));
                 }
                 acknowledgeFindPhone();
                 break;
             case DeviceEvent.FIND_PHONE_STOP:
                 UserError.Log.d(TAG, "find phone stopped");
-                if (player != null && player.isPlaying()) player.stop();
+                JoH.stopSoundUri();
                 break;
             case DeviceEvent.MUSIC_CONTROL:
                 UserError.Log.d(TAG, "got music control");

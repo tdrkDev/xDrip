@@ -1655,12 +1655,16 @@
     <string name="bridge_battery">Батарея трансмиттера</string>
     <string name="external_status_strings_eg_tbr">Внешние строки состояний, напр. ВБС из AAPS</string>
     <string name="accept_external_status">Принимать внешние состояния</string>
+    <string name="cancel_by_default">Отмена по умолчанию</string>
+    <string name="old">Старый</string>
+    <string name="neww">Новый</string>
+    <string name="reschedule_with_new_timing">Перезапланировать с новым временем?</string>
     <string name="select_new_sound_source">Выберите новый источник звука</string>
     <string name="snooze_done">← Отложить / Готово →</string>
     <string name="zero_value">Нулевое значение</string>
     <string name="adjust_dose">Изменить дозу</string>
     <string name="Dose">Доза</string>
-    <string name="choose_type">Выберите тип</string>
+    <string name="choose_type">Выбрать тип</string>
     <string name="invalid_serial">Неверный серийный номер</string>
     <string name="set_pen_to_format">Настроить ручку %s на %s</string>
     <string name="pen_contains_which_insulin_type">Какой тип инсулина находится в ручке %s?</string>

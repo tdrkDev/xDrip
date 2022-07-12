@@ -901,6 +901,7 @@
     <string name="days">ימים</string>
     <string name="bluereader_position">בדוק את המיקום של ה-blueReader על הסנסור, אחרת יצליח לקרוא!</string>
     <string name="offical_msg">האפליקציה הרשמית</string>
+    <string name="eng_mode_is_on">מצב המהנדסים פועל. נא לבטלו אלא אם אתם בטוחים שאתם זקוקים לו כי הוא עלול לגרום להתנהגות בלתי צפויה.</string>
     <string name="yes">כן</string>
     <string name="xdrip_compatible_features">תכונות %s xDrip</string>
     <string name="garmin">Garmin</string>
@@ -1518,4 +1519,7 @@
     <string name="choose_type">בחר סוג</string>
     <string name="invalid_serial">מספר סידורי לא תקין</string>
     <string name="pen_contains_which_insulin_type">איזה סוג אינסולין יש בעט %s?</string>
+    <string name="show_action_buttons_within_alerts">הצג כפתורי פעולות (לדוגמה נודניק) בתוך ההתראות</string>
+    <string name="alert_buttons">כפתורי פעולות</string>
+    <string name="please_wait_seconds_before_trying_to_start_sensor">אנא המתינו %d שניות לפני שתנסו להפעיל חיישן</string>
 </resources>

@@ -50,6 +50,7 @@ import com.eveningoutpost.dexdrip.utils.PowerStateReceiver;
 import com.eveningoutpost.dexdrip.watch.miband.MiBand;
 import com.eveningoutpost.dexdrip.watch.miband.MiBandEntry;
 import com.eveningoutpost.dexdrip.wearintegration.Amazfitservice;
+import com.eveningoutpost.dexdrip.Services.broadcastservice.BroadcastEntry;
 import com.eveningoutpost.dexdrip.xdrip;
 
 import java.util.Date;
@@ -713,6 +714,7 @@ public class Notifications extends IntentService {
         b.setContentIntent(resultPendingIntent);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             b.setLocalOnly(true);
+            b.setOnlyAlertOnce(true);
         }
         // strips channel ID if disabled
         return XdripNotification.build(b);
@@ -1037,9 +1039,7 @@ public class Notifications extends IntentService {
                 Amazfitservice.start("xDrip_Otheralert", message, 30);
             }
 
-            if (MiBandEntry.areOtherAlertsEnabled()) {
-                MiBand.sendAlert(type, message);
-            }
+            BroadcastEntry.sendAlert(type, message);
         }
     }
 

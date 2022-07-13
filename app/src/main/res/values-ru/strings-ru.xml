@@ -1637,7 +1637,7 @@
     <string name="snooze_done">← Отложить / Готово →</string>
     <string name="Dose">Доза</string>
     <string name="choose_type">Выбрать тип</string>
-	    <string name="title_variant">Вы используете вариант xDrip+</string>
+    <string name="title_variant">Вы используете вариант xDrip+</string>
     <string name="sensor_expired">ЗАКОНЧИЛСЯ!</string>
     <plurals name="sensor_expires">
         <item quantity="one">Заканчивается: %s день</item>

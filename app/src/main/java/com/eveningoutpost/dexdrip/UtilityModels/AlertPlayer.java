@@ -34,7 +34,6 @@ import com.eveningoutpost.dexdrip.eassist.AlertTracker;
 import com.eveningoutpost.dexdrip.ui.helpers.AudioFocusType;
 import com.eveningoutpost.dexdrip.watch.lefun.LeFun;
 import com.eveningoutpost.dexdrip.watch.lefun.LeFunEntry;
-import com.eveningoutpost.dexdrip.watch.miband.Const;
 import com.eveningoutpost.dexdrip.watch.miband.MiBand;
 import com.eveningoutpost.dexdrip.watch.miband.MiBandEntry;
 import com.eveningoutpost.dexdrip.watch.thinjam.BlueJayEntry;
@@ -624,7 +623,7 @@ public class AlertPlayer {
         }
 
         if (MiBandEntry.areAlertsEnabled() && ActiveBgAlert.currentlyAlerting()) {
-            MiBand.sendAlert(Const.BG_ALERT_TYPE, highlow + " " + bgValue);
+            MiBand.sendAlert(com.eveningoutpost.dexdrip.watch.miband.Const.BG_ALERT_TYPE, highlow + " " + bgValue);
         }
 
         if (ActiveBgAlert.currentlyAlerting()) {

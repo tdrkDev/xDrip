@@ -47,8 +47,6 @@ import com.eveningoutpost.dexdrip.evaluators.PersistentHigh;
 import com.eveningoutpost.dexdrip.ui.NumberGraphic;
 import com.eveningoutpost.dexdrip.utils.DexCollectionType;
 import com.eveningoutpost.dexdrip.utils.PowerStateReceiver;
-import com.eveningoutpost.dexdrip.watch.miband.MiBand;
-import com.eveningoutpost.dexdrip.watch.miband.MiBandEntry;
 import com.eveningoutpost.dexdrip.wearintegration.Amazfitservice;
 import com.eveningoutpost.dexdrip.Services.broadcastservice.BroadcastEntry;
 import com.eveningoutpost.dexdrip.xdrip;
@@ -617,10 +615,10 @@ public class Notifications extends IntentService {
         }
         final BestGlucose.DisplayGlucose dg = (use_best_glucose) ? BestGlucose.getDisplayGlucose() : null;
         final boolean use_color_in_notification = false; // could be preference option
-        final SpannableString titleString = new SpannableString(lastReading == null ? "BG Reading Unavailable" : (dg != null) ? (dg.spannableString(dg.unitized + " " + dg.delta_arrow,use_color_in_notification))
+        final SpannableString titleString = new SpannableString(lastReading == null ? xdrip.getAppContext().getString(R.string.bg_reading_unavailable) : (dg != null) ? (dg.spannableString(dg.unitized + " " + dg.delta_arrow,use_color_in_notification))
                 : (lastReading.displayValue(mContext) + " " + lastReading.slopeArrow()));
         b.setContentTitle(titleString)
-                .setContentText("xDrip Data collection service is running.")
+                .setContentText(xdrip.getAppContext().getString(R.string.xdrip_data_collection_service_is_running))
                 .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
                 .setUsesChronometer(false);
 
@@ -864,9 +862,9 @@ public class Notifications extends IntentService {
                 userNotification.delete();
             }
             final long calibration_hours = Calibration.msSinceLastCalibration() / (1000 * 60 * 60);
-            UserNotification.create(calibration_hours + " hours since last Calibration  (@" + JoH.hourMinuteString() + ")", "calibration_alert", new Date().getTime());
-            String title = "Calibration Needed";
-            String content = calibration_hours + " hours since last calibration";
+            UserNotification.create(calibration_hours + " " + getString(R.string.hours_since_last_calibration) + "  (@" + JoH.hourMinuteString() + ")", "calibration_alert", new Date().getTime());
+            String title = getString(R.string.calibration_needed);
+            String content = calibration_hours + " " + getString(R.string.hours_since_last_calibration);
             Intent intent = new Intent(mContext, AddCalibration.class);
             calibrationNotificationCreate(title, content, intent, calibrationNotificationId);
         }
@@ -876,8 +874,8 @@ public class Notifications extends IntentService {
         UserNotification userNotification = UserNotification.lastDoubleCalibrationAlert();
         if ((userNotification == null) || (userNotification.timestamp <= ((new Date().getTime()) - (60000 * calibration_snooze)))) {
             if (userNotification != null) { userNotification.delete(); }
-            UserNotification.create("Double Calibration", "double_calibration_alert", new Date().getTime());
-            String title = "Sensor is ready";
+            UserNotification.create(getString(R.string.double_calibration), "double_calibration_alert", new Date().getTime());
+            String title = getString(R.string.sensor_is_ready);
             String content = getString(R.string.sensor_is_ready_please_enter_double_calibration) + "  (@" + JoH.hourMinuteString() + ")";
             Intent intent = new Intent(mContext, DoubleCalibrationActivity.class);
             calibrationNotificationCreate(title, content, intent, calibrationNotificationId);
@@ -888,9 +886,9 @@ public class Notifications extends IntentService {
         UserNotification userNotification = UserNotification.lastExtraCalibrationAlert();
         if ((userNotification == null) || (userNotification.timestamp <= ((new Date().getTime()) - (60000 * calibration_snooze)))) {
             if (userNotification != null) { userNotification.delete(); }
-            UserNotification.create("Extra Calibration Requested", "extra_calibration_alert", new Date().getTime());
-            String title = "Calibration Requested";
-            String content = "Increase performance by calibrating now" + "  (@" + JoH.hourMinuteString() + ")";
+            UserNotification.create(getString(R.string.extra_calibration_requested), "extra_calibration_alert", new Date().getTime());
+            String title = getString(R.string.calibration_requested);
+            String content = getString(R.string.increase_performance_by_calibrating_now) + "  (@" + JoH.hourMinuteString() + ")";
             Intent intent = new Intent(mContext, AddCalibration.class);
             calibrationNotificationCreate(title, content, intent, extraCalibrationNotificationId);
         }

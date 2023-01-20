@@ -978,7 +978,7 @@ public class MiBandService extends JamBaseBluetoothSequencer {
             if (MiBand.getPersistentAuthMac().isEmpty()) {
                 MiBand.setPersistentAuthMac(MiBand.getMac());
                 MiBand.setPersistentAuthKey(JoH.bytesToHex(authorisation.getLocalKey()), MiBand.getPersistentAuthMac());
-                String msg = "MiBand was successfully authenticated";
+                String msg = xdrip.getAppContext().getString(R.string.miband_was_successfully_authenticated);
                 JoH.static_toast_long(msg);
                 UserError.Log.e(TAG, msg);
             }
@@ -992,7 +992,7 @@ public class MiBandService extends JamBaseBluetoothSequencer {
             if (authSubscription != null) {
                 authSubscription.unsubscribe();
             }
-            String msg = "Cannot authorize miband, please recheck Auth code";
+            String msg = xdrip.getAppContext().getString(R.string.cannot_authorize_miband_please_recheck_auth_code);
             JoH.static_toast_long(msg);
             UserError.Log.e(TAG, msg);
             changeState(AUTHORIZE_FAILED);
@@ -1210,7 +1210,7 @@ public class MiBandService extends JamBaseBluetoothSequencer {
                             if (firmware.getFirmwareType() == FirmwareOperations.FirmwareType.FIRMWARE) {
                                 //send reboot
                             } else {
-                                UserError.Log.e(TAG, "Watch Face has been installed successfully");
+                                UserError.Log.e(TAG, xdrip.getAppContext().getString(R.string.watch_face_has_been_installed_successfully));
                                 changeNextState();
                                 resetFirmwareState(true);
                             }

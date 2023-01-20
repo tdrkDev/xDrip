@@ -1825,4 +1825,16 @@
     <string name="use_background_scans">Use Background Scans</string>
     <string name="android_8_background_scanning">Use Android 8+ background scanning feature</string>
     <string name="close">Close</string>
+    <string name="bg_reading_unavailable">BG Reading Unavailable</string>
+    <string name="xdrip_data_collection_service_is_running">xDrip Data collection service is running.</string>
+    <string name="calibration_needed">Calibration Needed</string>
+    <string name="hours_since_last_calibration">hours since last calibration</string>
+    <string name="double_calibration">Double Calibration</string>
+    <string name="sensor_is_ready">Sensor is ready</string>
+    <string name="extra_calibration_requested">Extra Calibration Requested</string>
+    <string name="calibration_requested">Calibration Requested</string>
+    <string name="increase_performance_by_calibrating_now">Increase performance by calibrating now</string>
+    <string name="miband_was_successfully_authenticated">MiBand was successfully authenticated</string>
+    <string name="cannot_authorize_miband_please_recheck_auth_code">Cannot authorize miband, please recheck Auth code</string>
+    <string name="watch_face_has_been_installed_successfully">Watch Face has been installed successfully</string>
 </resources>

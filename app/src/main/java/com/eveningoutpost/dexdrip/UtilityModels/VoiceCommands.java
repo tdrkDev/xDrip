@@ -18,7 +18,9 @@ import com.eveningoutpost.dexdrip.Services.G5BaseService;
 import com.eveningoutpost.dexdrip.Services.Ob1G5CollectionService;
 import com.eveningoutpost.dexdrip.Services.UiBasedCollector;
 import com.eveningoutpost.dexdrip.cgm.medtrum.MedtrumCollectionService;
+import com.eveningoutpost.dexdrip.cloud.backup.BackupActivity;
 import com.eveningoutpost.dexdrip.insulin.opennov.data.SaveCompleted;
+import com.eveningoutpost.dexdrip.plugin.Registry;
 import com.eveningoutpost.dexdrip.profileeditor.BasalProfileEditor;
 import com.eveningoutpost.dexdrip.ui.activities.DatabaseAdmin;
 import com.eveningoutpost.dexdrip.ui.dialog.G6CalibrationCodeDialog;
@@ -88,6 +90,8 @@ public class VoiceCommands {
         } else if (allWords.equals("test ui based collector")) {
             UiBasedCollector.switchToAndEnable(mActivity);
             JoH.static_toast_long("Enabling UI based collector");
+        } else if (allWords.equals("test cloud backup")) {
+            JoH.startActivity(BackupActivity.class);
         } else if (allWords.contentEquals("delete selected glucose meter") || allWords.contentEquals("delete selected glucose metre")) {
             Pref.setString("selected_bluetooth_meter_address", "");
         } else if (allWords.contentEquals("delete all finger stick data") || (allWords.contentEquals("delete all fingerstick data"))) {
@@ -169,6 +173,10 @@ public class VoiceCommands {
                 break;
             case "start usb configuration":
                 JoH.startActivity(MtpConfigureActivity.class);
+                break;
+            case "erase all plugins":
+                Registry.eraseAll();
+                JoH.static_toast_long("Erasing all plugins");
                 break;
             case "database administration":
                 JoH.startActivity(DatabaseAdmin.class);

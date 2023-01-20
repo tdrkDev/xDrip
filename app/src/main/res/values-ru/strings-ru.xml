@@ -360,7 +360,7 @@
     <string name="show_general_and_collection_settings">Показать настройки и настройки коллектора</string>
     <string name="copy_all_settings">Скопировать все настройки</string>
     <string name="sensor_is_ready_please_enter_double_calibration">Сенсор готов, пожалуйста, введите начальную калибровку</string>
-    <string name="in_order_to_get_started_please_perform_two_finger">Чтобы начать работу, пожалуйста, сделайте два измерения из пальца и введите результаты здесь!</string>
+    <string name="in_order_to_get_started_please_perform_two_finger">Чтобы начать работу, пожалуйста, сделайте 2 измерения из пальца с промежутком 5 минут и введите результаты здесь, это повысит точность в первые часы! Если вы делаете только одно измерение, оставьте второе поле пустым.</string>
     <string name="enter_first_bg_value">Введите первое значение ГК</string>
     <string name="enter_second_bg_value">Введите второе значение ГК</string>
     <string name="language_editor">Редактор языков</string>
@@ -873,7 +873,7 @@
     <string name="bluetooth_scan">Поиск Bluetooth</string>
     <string name="level_alerts">Тревоги уровня</string>
     <string name="override_calibration">Перезаписать калибровку</string>
-    <string name="only_stop_your_sensor_when_you_actually_plan">Останавливайте ваш сенсор, только когда вы действительно планируете снять его, в противном случае оставьте его запущенным!</string>
+    <string name="only_stop_your_sensor_when_you_actually_plan">Останавливайте ваш сенсор, только когда вы действительно планируете физически снять его, в противном случае оставьте его запущенным!</string>
     <string name="restart_collector">Перезагрузить коллектор</string>
     <string name="forget_device">Забыть устройство</string>
     <string name="other_notes">Другие заметки:</string>
@@ -1688,7 +1688,7 @@
     <string name="need_permission_for_saved_files">Необходимо разрешение для сохранения файлов</string>
     <string name="stopping_sensor_due_to_serial_number_change">Останавливаем сенсор из-за смены серийного номера</string>
     <string name="sensor_raw_data_sanity_failure">Ошибка raw-данных сенсора (возможно, сенсор не под кожей):</string>
-    <string name="refusing_to_create_a_treatement_more_than_1_hours_in_the_future">Невозможно создать болюс/углеводы более чем на 1 час в будущем!</string>
+    <string name="refusing_to_create_a_treatment_more_than_1_hours_in_the_future">Невозможно создать болюс/углеводы более чем на 1 час в будущем!</string>
     <string name="could_not_find_miband_try_again">Не удалось найти Mi Band, пожалуйста, попробуйте еще раз</string>
     <string name="wrong_mi_band_authorization_key_recheck">Неверный ключ авторизации Mi Band, пожалуйста, проверьте ключ и попробуйте подключиться еще раз</string>
     <string name="calibration_sent_to_master_for_processing">Калибровка отправлена на мастер для обработки</string>

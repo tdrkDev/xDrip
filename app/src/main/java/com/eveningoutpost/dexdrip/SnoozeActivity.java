@@ -99,7 +99,7 @@ public class SnoozeActivity extends ActivityWithMenu {
 
     static final long infiniteSnoozeValueInMinutes = 5256000;//10 years
     //static final int snoozeValues[] = new int []{5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 75, 90, 105, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600};
-    static final int snoozeValues[] = new int []{ 10, 15, 20, 30, 40, 50, 60, 75, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600, 720};
+    static final int snoozeValues[] = Pref.getBooleanDefaultFalse("naughty_child_mode") ? new int []{ 10, 15, 20, 30, 40, 50, 60, 75, 90, 120} : new int []{ 10, 15, 20, 30, 40, 50, 60, 75, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600, 720};
 
     static int getSnoozeLocation(int time) {
         for (int i=0; i < snoozeValues.length; i++) {
@@ -265,10 +265,18 @@ public class SnoozeActivity extends ActivityWithMenu {
                 final NumberPicker snoozeValue = (NumberPicker) d.findViewById(R.id.numberPicker1);
 
                 //don't use SetSnoozePickerValues because an additional value must be added
-                String[] values = new String[snoozeValues.length + 1];//adding place for "until you re-enable"
-                for (int i = 0;i < values.length - 1;i++)
-                    values[i] = getNameFromTime(snoozeValues[i]);
-                values[values.length - 1] = getString(R.string.until_you_reenable);
+                String[] values;
+                if (!prefs.getBoolean("naughty_child_mode", false)) {
+                    values = new String[snoozeValues.length + 1];//adding place for "until you re-enable"
+                    for (int i = 0; i < values.length - 1; i++)
+                        values[i] = getNameFromTime(snoozeValues[i]);
+                    values[values.length - 1] = getString(R.string.until_you_reenable);
+                } else {
+                    values = new String[snoozeValues.length];//adding place for "until you re-enable"
+                    for (int i = 0; i < values.length; i++)
+                        values[i] = getNameFromTime(snoozeValues[i]);
+                }
+
                 snoozeValue.setMaxValue(values.length - 1);
                 snoozeValue.setMinValue(0);
                 snoozeValue.setDisplayedValues(values);
@@ -279,7 +287,7 @@ public class SnoozeActivity extends ActivityWithMenu {
                     @Override
                     public void onClick(View v) {
                         long minutes;
-                        if (snoozeValue.getValue() == snoozeValue.getMaxValue()) {
+                        if (snoozeValue.getValue() == snoozeValue.getMaxValue() && !prefs.getBoolean("naughty_child_mode", false)) {
                             minutes = infiniteSnoozeValueInMinutes;
                         } else {
                             minutes = SnoozeActivity.getTimeFromSnoozeValue(snoozeValue.getValue());

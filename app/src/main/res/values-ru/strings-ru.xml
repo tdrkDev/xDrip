@@ -1797,4 +1797,6 @@
     <string name="miband_was_successfully_authenticated">Mi Band успешно аутентифицирован</string>
     <string name="cannot_authorize_miband_please_recheck_auth_code">Не удалось авторизовать Mi Band, пожалуйста, проверьте ключ авторизации</string>
     <string name="watch_face_has_been_installed_successfully">Циферблат был успешно установлен</string>
+    <string name="title_naughty_child_mode">Режим непослушного ребенка</string>
+    <string name="summary_naughty_child_mode">Отключает возможность откладывать тревоги более чем на 2 часа (только инженерный режим)</string>
 </resources>

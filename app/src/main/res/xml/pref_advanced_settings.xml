@@ -1559,6 +1559,13 @@
 
                 <CheckBoxPreference
                     android:defaultValue="false"
+                    android:dependency="engineering_mode"
+                    android:key="naughty_child_mode"
+                    android:summary="@string/summary_naughty_child_mode"
+                    android:title="@string/title_naughty_child_mode" />
+
+                <CheckBoxPreference
+                    android:defaultValue="false"
                     android:dependency="allow_testing_with_dead_sensor"
                     android:key="allow_testing_with_dead_sensor"
                     android:summary="@string/summary_allow_testing_with_dead_sensor"

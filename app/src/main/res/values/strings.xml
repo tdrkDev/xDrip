@@ -1837,4 +1837,6 @@
     <string name="miband_was_successfully_authenticated">MiBand was successfully authenticated</string>
     <string name="cannot_authorize_miband_please_recheck_auth_code">Cannot authorize miband, please recheck Auth code</string>
     <string name="watch_face_has_been_installed_successfully">Watch Face has been installed successfully</string>
+    <string name="title_naughty_child_mode">Naughty child mode</string>
+    <string name="summary_naughty_child_mode">Disables the ability to snooze alarms for more than 2 hours (engineering mode only)</string>
 </resources>

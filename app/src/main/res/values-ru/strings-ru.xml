@@ -601,7 +601,7 @@
     <string name="reset_bluetooth">Перезагрузить Bluetooth, выключив и включив его, если мы ничего не получаем 20 минут</string>
     <string name="bluetooth_watchdog">Bluetooth Watchdog</string>
     <string name="reset_bluetooth_g5">Перезагружать Bluetooth, выключая и включая его, чтобы обеспечить работу источника данных G5. Без этого коллектор G5 может перестать работать.</string>
-    <string name="g5_bluetooth_watchdog">G5 Bluetooth Watchdog</string>
+    <string name="g5_bluetooth_watchdog">Dex Bluetooth Watchdog</string>
     <string name="close_gatt">Если Bluetooth watchdog часто активируется, вы можете попробовать отключить эту настройку, чтобы посмотреть, поможет ли это</string>
     <string name="older_bluetooth_wakelocks">Старые блокировки сна Bluetooth, которые могут тратить больше батареи, но могут быть необходимы для приема Bluetooth</string>
     <string name="reset_bluetooth_on_off">Перезагружать Bluetooth, выключая и включая его, каждые несколько минут! Включите, только если вы тестируете. Это может мешать всему, что использует Bluetooth.</string>
@@ -696,12 +696,12 @@
     <string name="low_level_value">Низкоуровневое значение диагностики/прототипа</string>
     <string name="transmitter_id">ID вашего трансмиттера Dexcom, напр. 12AB3</string>
     <string name="advanced_g5_settings">Продвинутые настройки G5 для редких ситуаций</string>
-    <string name="g5_debug_settings">Настройки отладки G5/G6</string>
+    <string name="g5_debug_settings">Настройки отладки G5/G6/Dex1</string>
     <string name="g5_scan_constantly">Некоторые устройства лучше работают, когда сканируют постоянно, некоторые – нет. Если считывание работает, когда эта настройка не выбрана, у вас улучшится продолжительность работы от батареи. Обычно лучше держать это отключенным</string>
     <string name="scan_for_g5_constantly">Искать G5 постоянно</string>
     <string name="g5_force_ui_thread">Это критично для некоторых Android-устройств, чтобы правильно подключиться, но может вызывать пропущенные показания, когда используются другие интенсивные UI-активности.</string>
     <string name="force_g5_ui_thread">Принудительно G5 в поток UI</string>
-    <string name="authentificate_before_reading">Аутентификация G5 перед каждым считыванием</string>
+    <string name="authentificate_before_reading">Аутентификация перед каждым считыванием</string>
     <string name="g5_full_authentification">Это вызовет попытки полной аутентификации при каждом считывании. Нужно для новых версий прошивки трансмиттера G5.</string>
     <string name="unbond_g5_before_read">Отсоединять G5 перед каждым считыванием</string>
     <string name="g5_remove_before_read">Это удалит G5 из вашего списка сопряженных устройств и попытается провести полную аутентификацию и соединение при каждой попытке считывания.</string>
@@ -1326,8 +1326,8 @@
     <string name="title_ob1_g5_fallback_to_xdrip">Откат к xDrip</string>
     <string name="summary_ob1_minimize_scanning">Использовать эвристику для минимизации поиска Bluetooth + сохранения энергии</string>
     <string name="title_ob1_minimize_scanning">Минимизировать поиск</string>
-    <string name="summary_using_g6">Я использую сенсор G6</string>
-    <string name="title_using_g6">Поддержка G6</string>
+    <string name="summary_using_g6">Я использую сенсор G6 или Dexcom 1</string>
+    <string name="title_using_g6">Поддержка G6/Dex1</string>
     <string name="summary_ob1_g5_allow_resetbond">Коллектор OB1 может отсоединяться, если он думает, что шифрование не удалось. Если у вас проблемы с этим отсоединением, то выключите эту настройку. Если после этого вы полностью потеряете соединение, убедитесь, что это включено.</string>
     <string name="title_ob1_g5_allow_resetbond">Разрешить отсоединение OB1</string>
     <string name="summary_ob1_initiate_bonding_flag">Коллектор OB1 может инициировать соединение.</string>
@@ -1547,7 +1547,7 @@
     <string name="librealarm_data_format_appears_incompatible_protocol_changed_or_no_data">Формат данных LibreAlarm кажется несовместимым!? изменился протокол или нет данных?</string>
     <string name="please_update_librealarm_to_use_oop_algorithm">Пожалуйста, обновите LibreAlarm или используйте OOP algorithm</string>
     <string name="sensor_clock_has_not_advanced">Время сенсора не увеличилось!</string>
-    <string name="sensor_age_has_gone_backwards">Возраст сенсора отошел назад!!</string>
+    <string name="sensor_age_has_gone_backwards">Возраст сенсора отошел назад!</string>
     <string name="phone_has_no_nfc_reader">У смартфона нет NFC-считывателя</string>
     <string name="nfc_is_not_enabled">NFC не включен</string>
     <string name="phone_nfc_is_having_problems">NFC смартфона имеет проблемы!</string>
@@ -1580,7 +1580,7 @@
     <string name="pref_ringtone_silent">Тихий</string>
     <string name="pref_title_ringtone">Мелодия</string>
     <string name="pref_title_vibrate">Вибрация</string>
-    <string name="no_sensor_found">Сенсор не найден</string>
+    <string name="no_sensor_found">Сенсор не найден (трансмиттер не на сенсоре)</string>
     <string name="checksum_failed__retrying">Ошибка контрольной суммы - повторная попытка</string>
     <string name="scanning">Сканирование</string>
     <string name="authentication_failed_wrong_password">Неудачная аутентификация. Неправильный пароль?</string>

@@ -5,13 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.eveningoutpost.dexdrip.BestGlucose;
-import com.eveningoutpost.dexdrip.Models.JoH;
-import com.eveningoutpost.dexdrip.UtilityModels.Constants;
+import com.eveningoutpost.dexdrip.models.JoH;
+import com.eveningoutpost.dexdrip.utilitymodels.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.eveningoutpost.dexdrip.Models.JoH.hourMinuteString;
+import static com.eveningoutpost.dexdrip.models.JoH.hourMinuteString;
 
 public class DisplayData {
     String bgValueText;

@@ -51,6 +51,7 @@
         <item>5</item>
     </string-array>
     <string name="title_activity_simulation">Spoken Treatment</string>
+    <string name="keypad_treatment">Keypad Treatment</string>
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
     <string name="zero">0</string>

@@ -67,7 +67,8 @@ public class DailyIntentService extends IntentService {
                 Long start = JoH.tsl();
 
                 // @TecMunky -- save database before pruning - allows daily capture of database
-                if (Pref.getBooleanDefaultFalse("save_db_ondemand")) {
+                if (Pref.getBooleanDefaultFalse("save_db_ondemand") && !Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                    Log.e(TAG, "Daily Save Database");
                     try {
                         String export = DatabaseUtil.saveSql(xdrip.getAppContext(), "daily");
                     } catch (Exception e) {
@@ -89,35 +90,50 @@ public class DailyIntentService extends IntentService {
                     Log.e(TAG, "DailyIntentService exception on watch clear DB ", e);
                 }
                 try {
-                    UserError.cleanup();
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "UserError cleanup");
+                        UserError.cleanup();
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "DailyIntentService exception on UserError ", e);
                 }
                 try {
-                    BgSendQueue.cleanQueue(); // no longer used
-
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "BgSendQueue cleanup");
+                        BgSendQueue.cleanQueue(); // no longer used
+                    }
                 } catch (Exception e) {
                     Log.d(TAG, "DailyIntentService exception on BgSendQueue " + e);
                 }
                 try {
-                    CalibrationSendQueue.cleanQueue();
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "CalibrationSendQueue cleanup");
+                        CalibrationSendQueue.cleanQueue();
+                    }
                 } catch (Exception e) {
                     Log.d(TAG, "DailyIntentService exception on CalibrationSendQueue " + e);
                 }
                 try {
-                    UploaderQueue.cleanQueue();
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "UploaderQueue cleanup");
+                        UploaderQueue.cleanQueue();
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "DailyIntentService exception on UploaderQueue ", e);
                 }
                 try {
-                    StepCounter.cleanup(Pref.getInt("retention_pebble_movement", 180));
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "StepCounter cleanup");
+                        StepCounter.cleanup(Pref.getInt("retention_pebble_movement", 180));
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "DailyIntentService exception on PebbleMovement ", e);
                 }
 
                 try {
                     final int bg_retention_days = Pref.getStringToInt("retention_days_bg_reading", 0);
-                    if (bg_retention_days > 0) {
+                    if (bg_retention_days > 0 && !Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "BG Retention is removing some days from database");
                         BgReading.cleanup(bg_retention_days);
                         try {
                             Libre2RawValue.cleanup(bg_retention_days);
@@ -145,12 +161,18 @@ public class DailyIntentService extends IntentService {
                     Log.e(TAG, "DailyIntentService exception on checkForAnUpdate ", e);
                 }
                 try {
-                    if (Home.get_master_or_follower()) RollCall.pruneOld(0);
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "RollCall cleanup");
+                        if (Home.get_master_or_follower()) RollCall.pruneOld(0);
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "exception on RollCall prune " + e);
                 }
                 try {
-                    DesertSync.cleanup();
+                    if (!Pref.getBooleanDefaultFalse("never_cleanup_dbs_daily")) {
+                        Log.e(TAG, "DesertSync cleanup");
+                        DesertSync.cleanup();
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "Exception cleaning up DesertSync");
                 }

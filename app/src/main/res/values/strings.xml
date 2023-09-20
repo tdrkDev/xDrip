@@ -1862,6 +1862,8 @@
     <string name="watch_face_has_been_installed_successfully">Watch Face has been installed successfully</string>
     <string name="title_naughty_child_mode">Naughty child mode</string>
     <string name="summary_naughty_child_mode">Disables the ability to snooze alarms for more than 2 hours (engineering mode only)</string>
+    <string name="title_never_cleanup_dbs">Never cleanup databases daily</string>
+    <string name="summary_never_cleanup_dbs">Disables databases (BGs, treatments, logs etc.) cleanup on Daily Intent Service and prevents daily database backup. Enable only if xDrip+ drops all your database periodically</string>
     <string name="title_advanced_settings_4_Lib2">Advanced settings for Libre 2</string>
     <string name="title_Lib2_show_raw_values">Show raw values in graph</string>
     <string name="summary_Lib2_show_raw_values">Switch on to show raw values in graph.</string>

@@ -1,7 +1,7 @@
 package com.eveningoutpost.dexdrip.watch.miband.Firmware;
 
-import com.eveningoutpost.dexdrip.Models.JoH;
-import com.eveningoutpost.dexdrip.Models.UserError;
+import com.eveningoutpost.dexdrip.models.JoH;
+import com.eveningoutpost.dexdrip.models.UserError;
 import com.eveningoutpost.dexdrip.watch.miband.Const;
 import com.eveningoutpost.dexdrip.watch.miband.Firmware.Sequence.SequenceState;
 import com.eveningoutpost.dexdrip.watch.miband.MiBandService;

@@ -771,8 +771,8 @@
     <string name="alert_seconds_reraise">Количество прошедших СЕКУНД до включения той же тревоги.</string>
     <string name="bg_falling_fast">ГК быстро падает</string>
     <string name="bg_rising_fast">ГК быстро растет</string>
-    <string name="falling_threshold">порог падения</string>
-    <string name="rising_threshold">порог повышения</string>
+    <string name="falling_threshold">порог скорости падения</string>
+    <string name="rising_threshold">порог скорости повышения</string>
     <string name="set_sound_for_bg_alerts">Задать звук для тревог ГК</string>
     <string name="alert_sound">Звук тревоги</string>
     <string name="override_silent_mode_these">Игнорировать беззвучный режим для этих тревог</string>
@@ -1281,8 +1281,8 @@
     <string name="title_lefun_screen_heart_pressure">Показывать давление</string>
     <string name="title_lefun_screen_find_phone">Показывать Найти телефон / Отложить</string>
     <string name="title_lefun_screen_mac_address">Показывать MAC-адрес</string>
-    <string name="summary_allow_samsung_workaround">Использовать обходные пути, чтобы избежать нестандартное поведение Android на устройствах Samsung. Без этого коллекторам обычно не удается получить данные.</string>
-    <string name="title_allow_samsung_workaround">Обходные пути Samsung</string>
+    <string name="summary_allow_samsung_workaround">Использовать обходные пути, чтобы избежать нестандартное поведение Android на некоторых устройствах. Без этого коллекторам обычно не удается получить данные.</string>
+    <string name="title_allow_samsung_workaround">Обходные пути пробуждения</string>
     <string name="summary_medtrum_use_native">Использовать калибровку трансмиттера вместо xDrip как основную</string>
     <string name="title_medtrum_use_native">Medtrum Native</string>
     <string name="summary_medtrum_a_hex">Шестнадцатеричное значение диагностического теста</string>
@@ -1311,7 +1311,7 @@
     <string name="summary_clfollow_download_meals">Скачивать еду с CareLink</string>
     <string name="title_clfollow_download_notifications">Уведомления</string>
     <string name="summary_clfollow_download_notifications">Скачивать уведомления с CareLink</string>
-    <string name="title_ob1_options">Настройки коллектора OB1 G5/G6</string>
+    <string name="title_ob1_options">Настройки коллектора OB1 G5/G6/G7</string>
     <string name="summary_use_ob1_g5_collector_service">Полностью переписан, должен работать на Android 4.4-9, поддерживает нативный режим и другое</string>
     <string name="title_use_ob1_g5_collector_service">Использовать коллектор OB1</string>
     <string name="summary_ob1_g5_use_transmitter_alg">Использовать внутренний алгоритм трансмиттера для вычисления показаний глюкозы, когда возможно.</string>
@@ -1784,6 +1784,13 @@
     <string name="format_string_ago">%s назад</string>
     <string name="use_background_scans">Использовать фоновые сканирования</string>
     <string name="android_8_background_scanning">Использовать функцию фонового сканирования Android 8+</string>
+    <string name="title_yRange">Настроить диапазон оси y</string>
+    <string name="titleInside_yRange">Включить</string>
+    <string name="summaryInside_yRange">Здесь вы можете настроить диапазон вертикальной (y) оси.\nОднако, если показания находятся вне этого диапазона, он автоматически расширится на нескольких часов, чтобы отобразить эти показания.</string>
+    <string name="title_ymin">Установить минимум оси y</string>
+    <string name="title_ymax">Установить максимум оси y</string>
+    <string name="summary_ymin">Укажите yMin на время, когда нет показаний ниже.</string>
+    <string name="summary_ymax">Укажите yMax на время, когда нет показаний выше.</string>
     <string name="close">Закрыть</string>
     <string name="bg_reading_unavailable">Показания ГК недоступны</string>
     <string name="xdrip_data_collection_service_is_running">Служба сбора показаний xDrip запущена.</string>

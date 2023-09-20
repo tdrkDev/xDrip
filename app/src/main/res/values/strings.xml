@@ -1864,6 +1864,14 @@
     <string name="summary_naughty_child_mode">Disables the ability to snooze alarms for more than 2 hours (engineering mode only)</string>
     <string name="title_never_cleanup_dbs">Never cleanup databases daily</string>
     <string name="summary_never_cleanup_dbs">Disables databases (BGs, treatments, logs etc.) cleanup on Daily Intent Service and prevents daily database backup. Enable only if xDrip+ drops all your database periodically</string>
+    <string name="cant_use_this_sensor_as_it_is">Can\'t use this sensor as it is</string>
+    <string name="sensor_status_not_yet_started">not yet started</string>
+    <string name="sensor_status_starting">starting</string>
+    <string name="sensor_status_ready">ready</string>
+    <string name="sensor_status_expired">expired</string>
+    <string name="sensor_status_shutdown">shutdown</string>
+    <string name="sensor_status_in_failure">in failure</string>
+    <string name="sensor_status_in_an_unknown_state">in an unknown state</string>
     <string name="title_advanced_settings_4_Lib2">Advanced settings for Libre 2</string>
     <string name="title_Lib2_show_raw_values">Show raw values in graph</string>
     <string name="summary_Lib2_show_raw_values">Switch on to show raw values in graph.</string>

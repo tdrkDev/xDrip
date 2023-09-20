@@ -4,6 +4,8 @@ import com.eveningoutpost.dexdrip.Home;
 import com.eveningoutpost.dexdrip.models.LibreOOPAlgorithm;
 import com.eveningoutpost.dexdrip.models.SensorSanity;
 
+import com.eveningoutpost.dexdrip.R;
+import com.eveningoutpost.dexdrip.xdrip;
 import com.eveningoutpost.dexdrip.models.UserError.Log;
 
 public class LibreUtils {
@@ -97,31 +99,31 @@ public class LibreUtils {
     
         switch (sensorStatusByte) {
             case 0x01:
-                sensorStatusString = "not yet started";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_not_yet_started);
                 break;
             case 0x02:
-                sensorStatusString = "starting";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_starting);
                 ret = true;
                 break;
             case 0x03:          // status for 14 days and 12 h of normal operation, libre reader quits after 14 days
-                sensorStatusString = "ready";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_ready);
                 ret = true;
                 break;
             case 0x04:          // status of the following 12 h, sensor delivers last BG reading constantly
-                sensorStatusString = "expired";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_expired);
                 // @keencave: to use dead sensor for test
     //            ret = true;
                 break;
             case 0x05:          // sensor stops operation after 15d after start
-                sensorStatusString = "shutdown";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_shutdown);
                 // @keencave: to use dead sensors for test
     //            ret = true;
                 break;
             case 0x06:
-                sensorStatusString = "in failure";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_in_failure);
                 break;
             default:
-                sensorStatusString = "in an unknown state";
+                sensorStatusString = xdrip.getAppContext().getString(R.string.sensor_status_in_an_unknown_state);
                 break;
         }
     
@@ -136,7 +138,7 @@ public class LibreUtils {
         }
     
         if (!ret) {
-            Home.toaststaticnext("Can't use this sensor as it is " + sensorStatusString);
+            Home.toaststaticnext(xdrip.getAppContext().getString(R.string.cant_use_this_sensor_as_it_is) + " " + sensorStatusString);
         }
     
         return ret;

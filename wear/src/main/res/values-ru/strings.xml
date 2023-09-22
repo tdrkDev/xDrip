@@ -248,4 +248,8 @@
     <string name="sensor_status_shutdown">выключился</string>
     <string name="sensor_status_in_failure">неработоспособен</string>
     <string name="sensor_status_in_an_unknown_state">в неизвестном состоянии</string>
+    <string name="units">ЕД</string>
+    <string name="g_carbs">г углеводов</string>
+    <string name="bg">ГК</string>
+    <string name="when">когда</string>
 </resources>

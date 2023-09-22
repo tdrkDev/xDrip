@@ -313,19 +313,19 @@ public class KeypadInputActivity extends Activity {
         switch (currenttab) {
             case "insulin":
                 insulintabbutton.setBackgroundColor(onColor);
-                append = " units";
+                append = " " + getString(R.string.units);
                 break;
             case "carbs":
                 carbstabbutton.setBackgroundColor(onColor);
-                append = "g carbs";
+                append = " " + getString(R.string.g_carbs);
                 break;
             case "bloodtest":
                 bloodtesttabbutton.setBackgroundColor(onColor);
-                append = " BG";  // TODO get mgdl or mmol here
+                append = " " + getString(R.string.bg);  // TODO get mgdl or mmol here
                 break;
             case "time":
                 timetabbutton.setBackgroundColor(onColor);
-                append = " time";
+                append = " " + getString(R.string.when);
                 break;
         }
         value = getValue(currenttab);

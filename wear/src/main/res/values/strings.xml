@@ -281,4 +281,8 @@
     <string name="sensor_status_shutdown">shutdown</string>
     <string name="sensor_status_in_failure">in failure</string>
     <string name="sensor_status_in_an_unknown_state">in an unknown state</string>
+    <string name="units">units</string>
+    <string name="g_carbs">g carbs</string>
+    <string name="bg">BG</string>
+    <string name="when">when</string>
 </resources>

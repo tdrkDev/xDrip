@@ -316,7 +316,7 @@
     <string name="very_low">ОЧЕНЬ НИЗКИЙ</string>
     <string name="low">низкий</string>
     <string name="space_units">" ед."</string>
-    <string name="units">единицы</string>
+    <string name="units">ЕД</string>
     <string name="carbs">углеводы</string>
     <string name="when">когда</string>
     <string name="speak_your_treatment">Произнесите запись терапии, напр.: x.x единиц инсулина / xx граммов углеводов</string>

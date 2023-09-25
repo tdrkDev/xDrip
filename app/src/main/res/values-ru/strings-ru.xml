@@ -857,6 +857,8 @@
     <string name="use_gravity_sensor_to_rotate_items">Использовать датчик силы тяжести для поворота предметов</string>
     <string name="low_bridge_battery">Низкий заряд трансмиттера</string>
     <string name="bridge_battery_dropped_to">Заряд трансмиттера снизился до:</string>
+    <string name="sensor_will_expire_in">Сенсор закончится через</string>
+    <string name="sensor_expiring">Сенсор заканчивается</string>
     <string name="reminders">Напоминания</string>
     <string name="error">ошибка</string>
     <string name="install_text_to_speech_data_question">Установить данные текста-в-речь?</string>

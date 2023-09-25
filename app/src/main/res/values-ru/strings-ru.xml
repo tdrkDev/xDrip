@@ -515,7 +515,7 @@
     <string name="alert_tone_colon">Звук тревоги:</string>
     <string name="choose_file">Выберите файл</string>
     <string name="select_time_for_alert_colon">Выберите время тревоги:</string>
-    <string name="all_day">весь день</string>
+    <string name="all_day">Весь день</string>
     <string name="tap_to_change">(нажм. для изм.)</string>
     <string name="override_phone_silent_mode_colon">Игнорировать беззвучный режим:</string>
     <string name="vibrate_on_alert">Вибрировать при тревоге</string>
@@ -865,6 +865,11 @@
     <string name="wake_up_screen_during_alerts">Включать экран во время тревог. Может разблокировать устройства с выключенной блокировкой экрана.</string>
     <string name="use_camera_light">Использовать вспышку камеры</string>
     <string name="flash_camera_light_during_alerts">Мигать вспышкой камеры во время тревог, когда подключено к зарядке</string>
+    <string name="enable_missed_reading_alert">Включить тревогу о пропущенных показаниях</string>
+    <string name="alert_if_no_data_received_in">Тревога, если показания не поступают в течение:</string>
+    <string name="wait_before_raising_the_same_alert">Ждать до запуска той же тревоги после откладывания:</string>
+    <string name="reraise_alerts_before_snooze_time">Перезапускать тревогу, пока не отложена</string>
+    <string name="alert_reraise_time_colon">Время до перезапуска тревоги:</string>
     <string name="reminders">Напоминания</string>
     <string name="error">ошибка</string>
     <string name="install_text_to_speech_data_question">Установить данные текста-в-речь?</string>

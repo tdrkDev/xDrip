@@ -888,6 +888,7 @@
     <string name="atom">Atom</string>
     <string name="use_gravity_sensor_to_rotate_items">Use Gravity Sensor to rotate items</string>
     <string name="low_bridge_battery">Low bridge battery</string>
+    <string name="bridge_battery_dropped_to">Bridge battery dropped to:</string>
     <string name="reminders">Reminders</string>
     <string name="error">error</string>
     <string name="install_text_to_speech_data_question">Install Text-To-Speech Data?</string>

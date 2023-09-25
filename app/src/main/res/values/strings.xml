@@ -891,6 +891,12 @@
     <string name="bridge_battery_dropped_to">Bridge battery dropped to:</string>
     <string name="sensor_will_expire_in">Sensor will expire in</string>
     <string name="sensor_expiring">Sensor expiring</string>
+    <string name="audio_focus">Audio Focus</string>
+    <string name="choose_what_to_do_with_other_apps_audio">Choose what to do with other apps while playing alerts and adjusting system volume levels</string>
+    <string name="wake_screen">Wake Screen</string>
+    <string name="wake_up_screen_during_alerts">Wake up screen during alerts. Might unlock devices that don\'t have screen lock enabled.</string>
+    <string name="use_camera_light">Use Camera Light</string>
+    <string name="flash_camera_light_during_alerts">Flash camera light during alerts when connected to a charger</string>
     <string name="reminders">Reminders</string>
     <string name="error">error</string>
     <string name="install_text_to_speech_data_question">Install Text-To-Speech Data?</string>

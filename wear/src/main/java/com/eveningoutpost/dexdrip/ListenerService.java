@@ -21,8 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.LocalBroadcastManager;
+
 import android.util.DisplayMetrics;
 import android.widget.Toast;
 
@@ -105,6 +104,9 @@ import static com.eveningoutpost.dexdrip.utilitymodels.BgSendQueue.doMgdl;
 import static com.eveningoutpost.dexdrip.utilitymodels.BgSendQueue.extraStatusLine;
 import static com.eveningoutpost.dexdrip.utilitymodels.BgSendQueue.resendData;
 import static com.eveningoutpost.dexdrip.utilitymodels.BgSendQueue.sgvLevel;
+
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  * Created by Emma Black on 12/26/14.
@@ -2416,7 +2418,7 @@ public class ListenerService extends WearableListenerService implements GoogleAp
                                     changed = true;
                                     bgData.save();
                                 } else {
-                                    if (bgData.source_info != null && (bgData.source_info.contains("Native") || bgData.source_info.contains("Follow"))) {
+                                    if (bgData.source_info != null && (bgData.source_info.contains("Native") || bgData.source_info.contains("Follow") || bgData.source_info.contains("G7"))) {
                                         UserError.Log.d(TAG, "Saving BgData without calibration as source info is native or follow");
                                         bgData.sensor = sensor;
                                         bgData.sensor_uuid = sensor.uuid;

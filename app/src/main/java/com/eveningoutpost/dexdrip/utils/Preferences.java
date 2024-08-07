@@ -1,5 +1,6 @@
 package com.eveningoutpost.dexdrip.utils;
 
+import static com.eveningoutpost.dexdrip.utils.DexCollectionType.getBestCollectorHardwareName;
 import static com.eveningoutpost.dexdrip.xdrip.gs;
 
 import android.Manifest;
@@ -16,6 +17,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -34,10 +37,10 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -58,9 +61,12 @@ import com.eveningoutpost.dexdrip.WidgetUpdateService;
 import com.eveningoutpost.dexdrip.alert.Registry;
 import com.eveningoutpost.dexdrip.calibrations.PluggableCalibration;
 import com.eveningoutpost.dexdrip.cgm.carelinkfollow.CareLinkFollowService;
+import com.eveningoutpost.dexdrip.cgm.carelinkfollow.auth.CareLinkAuthType;
 import com.eveningoutpost.dexdrip.cgm.nsfollow.NightscoutFollow;
 import com.eveningoutpost.dexdrip.cgm.sharefollow.ShareFollowService;
 import com.eveningoutpost.dexdrip.cgm.webfollow.Cpref;
+import com.eveningoutpost.dexdrip.cgm.carelinkfollow.auth.CareLinkAuthenticator;
+import com.eveningoutpost.dexdrip.cgm.carelinkfollow.auth.CareLinkCredentialStore;
 import com.eveningoutpost.dexdrip.g5model.DexSyncKeeper;
 import com.eveningoutpost.dexdrip.g5model.Ob1G5StateMachine;
 import com.eveningoutpost.dexdrip.healthconnect.HealthConnectEntry;
@@ -75,6 +81,7 @@ import com.eveningoutpost.dexdrip.models.UserError.Log;
 import com.eveningoutpost.dexdrip.models.UserNotification;
 import com.eveningoutpost.dexdrip.plugin.Dialog;
 import com.eveningoutpost.dexdrip.profileeditor.ProfileEditor;
+import com.eveningoutpost.dexdrip.receiver.InfoContentProvider;
 import com.eveningoutpost.dexdrip.services.ActivityRecognizedService;
 import com.eveningoutpost.dexdrip.services.BluetoothGlucoseMeter;
 import com.eveningoutpost.dexdrip.services.DexCollectionService;
@@ -120,12 +127,20 @@ import com.eveningoutpost.dexdrip.wearintegration.WatchUpdaterService;
 import com.eveningoutpost.dexdrip.webservices.XdripWebService;
 import com.eveningoutpost.dexdrip.xDripWidget;
 import com.eveningoutpost.dexdrip.xdrip;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.RGBLuminanceSource;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.nightscout.core.barcode.NSBarcodeConfig;
 
 import net.tribe7.common.base.Joiner;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.text.DecimalFormat;
@@ -165,6 +180,13 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
 
     private static AllPrefsFragment pFragment;
     private BroadcastReceiver mibandStatusReceiver;
+
+    // The following three variables enable us to create a common state from the input,
+    // whether we scan from camera or a file, and continue with the same following
+    // set of commands to avoid code duplication.
+    private volatile String scanFormat = null; // The format of the scan
+    private volatile String scanContents = null; // Text content of the scan coming either from camera or file
+    private volatile byte[] scanRawBytes = null; // Raw bytes of the scan
 
     private void refreshFragments() {
         refreshFragments(null);
@@ -296,6 +318,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                     Toast.makeText(getApplicationContext(), "Loaded " + Integer.toString(changes) + " preferences from QR code", Toast.LENGTH_LONG).show();
                     PlusSyncService.clearandRestartSyncService(getApplicationContext());
                     DesertSync.settingsChanged(); // refresh
+                    InfoContentProvider.ping("pref");
                     if (prefs.getString("dex_collection_method", "").equals("Follower")) {
                         PlusSyncService.clearandRestartSyncService(getApplicationContext());
                         GcmActivity.last_sync_request = 0;
@@ -336,7 +359,11 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected synchronized void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Let's reset variables just to be sure
+        scanFormat = null;
+        scanContents = null;
+        scanRawBytes = null;
         if (requestCode == Constants.HEALTH_CONNECT_RESPONSE_ID) {
             if (HealthConnectEntry.enabled()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -347,22 +374,64 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             }
         }
 
+        if (requestCode == Constants.ZXING_FILE_REQ_CODE) { // If we are scanning an image file, not using the camera
+            // The core of the following section, selecting the file, converting it into a bitmap, and then to a bitstream, is from:
+            // https://stackoverflow.com/questions/55427308/scaning-qrcode-from-image-not-from-camera-using-zxing
+            if (data == null || data.getData() == null) {
+                Log.e("TAG", "No file was selected");
+                return;
+            }
+            Uri uri = data.getData();
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                if (bitmap == null) {
+                    Log.e("TAG", "uri is not a bitmap," + uri.toString());
+                    return;
+                }
+                int width = bitmap.getWidth(), height = bitmap.getHeight();
+                int[] pixels = new int[width * height];
+                bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+                bitmap.recycle();
+                bitmap = null;
+                RGBLuminanceSource source = new RGBLuminanceSource(width, height, pixels);
+                BinaryBitmap bBitmap = new BinaryBitmap(new HybridBinarizer(source));
+                MultiFormatReader reader = new MultiFormatReader();
+                try {
+                    Result result = reader.decode(bBitmap);
+                    scanFormat = result.getBarcodeFormat().toString();
+                    scanContents = result.getText(); // The text content  of the scanned file
+                    scanRawBytes = result.getRawBytes();
+                } catch (NotFoundException e) {
+                    Log.e("TAG", "decode exception", e);
+                }
+            } catch (FileNotFoundException e) {
+                Log.e("TAG", "can not open file" + uri.toString(), e);
+            }
+        } else if (requestCode == Constants.ZXING_CAM_REQ_CODE) { // If we are scanning from camera
+            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            scanFormat = scanResult.getFormatName();
+            scanContents = scanResult.getContents(); // The text content of the scan from camera
+            scanRawBytes = scanResult.getRawBytes();
+        }
+        // We now have scan format, scan text content, and scan raw bytes in the corresponding variables.
+        // Everything after this is applied whether we scanned with camera or from a file.
 
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (scanResult == null || scanResult.getContents() == null) {
+        if (scanContents == null) { // If we have no scan content
+            UserError.Log.d(TAG, "No scan results ");
             return;
         }
-        if (scanResult.getFormatName().equals("QR_CODE")) {
 
-            final String scanresults = scanResult.getContents();
-            if (QRcodeUtils.hasDecoderMarker(scanresults)) {
-                installxDripPlusPreferencesFromQRCode(prefs, scanresults);
+        if (scanFormat.equals("QR_CODE")) { // The scan is a QR code
+
+            if (QRcodeUtils.hasDecoderMarker(scanContents)) {
+                installxDripPlusPreferencesFromQRCode(prefs, scanContents);
                 return;
             }
 
             try {
-                if (BlueJay.processQRCode(scanResult.getRawBytes())) {
+                if (BlueJay.processQRCode(scanRawBytes)) {
                     refreshFragments();
                     return;
                 }
@@ -371,7 +440,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             }
 
 
-            final NSBarcodeConfig barcode = new NSBarcodeConfig(scanresults);
+            final NSBarcodeConfig barcode = new NSBarcodeConfig(scanContents);
             if (barcode.hasMongoConfig()) {
                 if (barcode.getMongoUri().isPresent()) {
                     SharedPreferences.Editor editor = prefs.edit();
@@ -422,9 +491,9 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 editor.putBoolean("cloud_storage_mqtt_enable", false);
                 editor.apply();
             }
-        } else if (scanResult.getFormatName().equals("CODE_128")) {
-            Log.d(TAG, "Setting serial number to: " + scanResult.getContents());
-            prefs.edit().putString("share_key", scanResult.getContents()).apply();
+        } else if (scanFormat.equals("CODE_128")) {
+            Log.d(TAG, "Setting serial number to: " + scanContents);
+            prefs.edit().putString("share_key", scanContents).apply();
         }
         refreshFragments();
     }
@@ -1001,6 +1070,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             addPreferencesFromResource(R.xml.pref_data_sync);
             setupBarcodeConfigScanner();
             setupBarcodeShareScanner();
+            setupQrFromFile();
             bindPreferenceSummaryToValue(findPreference("cloud_storage_mongodb_uri"));
             bindPreferenceSummaryToValue(findPreference("cloud_storage_mongodb_collection"));
             bindPreferenceSummaryToValue(findPreference("cloud_storage_mongodb_device_status_collection"));
@@ -1173,11 +1243,6 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             final Preference collectionMethod = findPreference("dex_collection_method");
             final Preference runInForeground = findPreference("run_service_in_foreground");
             final Preference g5nonraw = findPreference("g5_non_raw_method");
-            final Preference g5extendedsut = findPreference("g5_extended_sut");
-            final Preference scanConstantly = findPreference("run_ble_scan_constantly");
-            final Preference runOnMain = findPreference("run_G5_ble_tasks_on_uithread");
-            final Preference reAuth = findPreference("always_get_new_keys");
-            final Preference reBond = findPreference("always_unbond_G5");
             final Preference wifiRecievers = findPreference("wifi_recievers_addresses");
             final Preference predictiveBG = findPreference("predictive_bg");
             final Preference interpretRaw = findPreference("interpret_raw");
@@ -1248,8 +1313,10 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             }
 
 
-            final Preference nsFollowDownload = findPreference("nsfollow_download_treatments");
+            final Preference nsFollowDownload = findPreference("nsfollow_download_treatments_screen");
             final Preference nsFollowUrl = findPreference("nsfollow_url");
+            final Preference nsFollowLag = findPreference("nsfollow_lag"); // Show the Nightscout follow wake delay setting only when NS follow is the data source
+            bindPreferenceSummaryToValue(findPreference("nsfollow_lag")); // Show the selected value as summary
             try {
                 nsFollowUrl.setOnPreferenceChangeListener((preference, newValue) -> {
                     NightscoutFollow.resetInstance();
@@ -1262,6 +1329,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
 
             final Preference shFollowUser = findPreference("shfollow_user");
             final Preference shFollowPass = findPreference("shfollow_pass");
+            final Preference shFollowServerUS = findPreference("dex_share_us_acct");
 
             if (collectionType == DexCollectionType.SHFollow) {
                 final Preference.OnPreferenceChangeListener shFollowListener = new Preference.OnPreferenceChangeListener() {
@@ -1276,6 +1344,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 try {
                     shFollowUser.setOnPreferenceChangeListener(shFollowListener);
                     shFollowPass.setOnPreferenceChangeListener(shFollowListener);
+                    shFollowServerUS.setOnPreferenceChangeListener(shFollowListener);
                 } catch (Exception e) {
                     //
                 }
@@ -1284,6 +1353,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 try {
                     collectionCategory.removePreference(shFollowUser);
                     collectionCategory.removePreference(shFollowPass);
+                    collectionCategory.removePreference(shFollowServerUS);
                 } catch (Exception e) {
                     //
                 }
@@ -1300,10 +1370,11 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             }
 
             //CareLink Follow preferences
-            final Preference carelinkFollowUser = findPreference("clfollow_user");
-            final Preference carelinkFollowPass = findPreference("clfollow_pass");
+            //final Preference carelinkFollowUser = findPreference("clfollow_user");
+            //final Preference carelinkFollowPass = findPreference("clfollow_pass");
             final Preference carelinkFollowCountry = findPreference("clfollow_country");
             final Preference carelinkFollowPatient = findPreference("clfollow_patient");
+            final Preference carelinkFollowLogin = findPreference("clfollow_login");
             final Preference carelinkFollowGracePeriod = findPreference("clfollow_grace_period");
             final Preference carelinkFollowMissedPollInterval = findPreference("clfollow_missed_poll_interval");
             final Preference carelinkFollowDownloadFingerBGs = findPreference("clfollow_download_finger_bgs");
@@ -1313,10 +1384,11 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
             //Add CL prefs for CLFollower
             if (collectionType == DexCollectionType.CLFollow) {
                 //Add CL prefs
-                collectionCategory.addPreference(carelinkFollowUser);
-                collectionCategory.addPreference(carelinkFollowPass);
+                //collectionCategory.addPreference(carelinkFollowUser);
+                //collectionCategory.addPreference(carelinkFollowPass);
                 collectionCategory.addPreference(carelinkFollowCountry);
                 collectionCategory.addPreference(carelinkFollowPatient);
+                collectionCategory.addPreference(carelinkFollowLogin);
                 collectionCategory.addPreference(carelinkFollowGracePeriod);
                 collectionCategory.addPreference(carelinkFollowMissedPollInterval);
                 collectionCategory.addPreference(carelinkFollowDownloadFingerBGs);
@@ -1332,24 +1404,56 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                         return true;
                     }
                 };
-                //Register prefChange handler
+                //Pref click handler for Login
+                final Preference.OnPreferenceClickListener carelinkLoginListener = new Preference.OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        new Thread() {
+                            public void run() {
+                                try {
+                                    String country = Pref.getString("clfollow_country", "").toLowerCase();
+                                    if (country.equals("")) {
+                                        JoH.static_toast(preference.getContext(), xdrip.gs(R.string.carelink_auth_country_required), Toast.LENGTH_LONG);
+                                    } else {
+                                        CareLinkAuthenticator authenticator = new CareLinkAuthenticator(country, CareLinkCredentialStore.getInstance());
+                                        if (authenticator.authenticate(getActivity(), CareLinkAuthType.MobileApp)) {
+                                            JoH.static_toast(preference.getContext(), xdrip.gs(R.string.carelink_auth_status_authenticated), Toast.LENGTH_LONG);
+                                            CareLinkFollowService.resetInstanceAndInvalidateSession();
+                                            CollectionServiceStarter.restartCollectionServiceBackground();
+                                        }
+                                        else {
+                                            JoH.static_toast(preference.getContext(), xdrip.gs(R.string.carelink_auth_status_not_authenticated), Toast.LENGTH_LONG);
+                                        }
+                                    }
+                                } catch (InterruptedException e) {
+
+                                }
+                            }
+                        }.start();
+
+                        return true;
+                    }
+                };
+                //Register preference handlers
                 try {
-                    carelinkFollowUser.setOnPreferenceChangeListener(carelinkFollowListener);
-                    carelinkFollowPass.setOnPreferenceChangeListener(carelinkFollowListener);
+                    //carelinkFollowUser.setOnPreferenceChangeListener(carelinkFollowListener);
+                    //carelinkFollowPass.setOnPreferenceChangeListener(carelinkFollowListener);
                     carelinkFollowCountry.setOnPreferenceChangeListener(carelinkFollowListener);
                     carelinkFollowPatient.setOnPreferenceChangeListener(carelinkFollowListener);
-                    carelinkFollowGracePeriod.setOnPreferenceChangeListener(carelinkFollowListener);
-                    carelinkFollowMissedPollInterval.setOnPreferenceChangeListener(carelinkFollowListener);
+                    carelinkFollowLogin.setOnPreferenceClickListener(carelinkLoginListener);
+                    //carelinkFollowGracePeriod.setOnPreferenceChangeListener(carelinkFollowListener);
+                    //carelinkFollowMissedPollInterval.setOnPreferenceChangeListener(carelinkFollowListener);
                 } catch (Exception e) {
                     //
                 }
             //Remove CL prefs for NON CLFollower
             } else {
                 try {
-                    collectionCategory.removePreference(carelinkFollowUser);
-                    collectionCategory.removePreference(carelinkFollowPass);
+                    //collectionCategory.removePreference(carelinkFollowUser);
+                    //collectionCategory.removePreference(carelinkFollowPass);
                     collectionCategory.removePreference(carelinkFollowCountry);
                     collectionCategory.removePreference(carelinkFollowPatient);
+                    collectionCategory.removePreference(carelinkFollowLogin);
                     collectionCategory.removePreference(carelinkFollowGracePeriod);
                     collectionCategory.removePreference(carelinkFollowMissedPollInterval);
                     collectionCategory.removePreference(carelinkFollowDownloadFingerBGs);
@@ -1681,8 +1785,19 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 try {
                     collectionCategory.removePreference(nsFollowUrl);
                     collectionCategory.removePreference(nsFollowDownload);
+                    collectionCategory.removePreference(nsFollowLag);
                 } catch (Exception e) {
                     //
+                }
+            }
+
+            if (getBestCollectorHardwareName().equals("G7")) { // Remove battery options, from G5/G6/Dex1/G7 Debug Settings, if we are using G7 or One+
+                try {
+                    PreferenceScreen screen = (PreferenceScreen) findPreference("xdrip_plus_g5_extra_settings");
+                    Preference pref = getPreferenceManager().findPreference("dex_battery_category");
+                    screen.removePreference(pref);
+                } catch (Exception e) {
+                    UserError.Log.wtf(TAG, "Failed to remove G7 battery options");
                 }
             }
 
@@ -1691,8 +1806,8 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 try {
                     collectionCategory.removePreference(carelinkFollowCountry);
                     collectionCategory.removePreference(carelinkFollowPatient);
-                    collectionCategory.removePreference(carelinkFollowPass);
-                    collectionCategory.removePreference(carelinkFollowUser);
+                    //collectionCategory.removePreference(carelinkFollowPass);
+                    //collectionCategory.removePreference(carelinkFollowUser);
                     collectionCategory.removePreference(carelinkFollowGracePeriod);
                     collectionCategory.removePreference(carelinkFollowMissedPollInterval);
                     collectionCategory.removePreference(carelinkFollowDownloadFingerBGs);
@@ -2000,6 +2115,15 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                         if ((Boolean) newValue) {
                             Inevitable.task("check-health-connect", 300, () -> HealthGamut.init(getActivity()));
                         }
+                        return true;
+                    });
+                } catch (Exception e) {
+                    //
+                }
+
+                try {
+                    findPreference("health_connect_manage").setOnPreferenceClickListener((preference) -> {
+                        HealthGamut.init(getActivity()).openPermissionManager();
                         return true;
                     });
                 } catch (Exception e) {
@@ -2377,6 +2501,7 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                     if (collectionType == DexCollectionType.NSFollow) {
                         collectionCategory.addPreference(nsFollowUrl);
                         collectionCategory.addPreference(nsFollowDownload);
+                        collectionCategory.addPreference(nsFollowLag);
                     }
 
 
@@ -2453,6 +2578,9 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
            //  removePreferenceFromCategory("use_ob1_g5_collector_service", "ob1_options");
            //  removePreferenceFromCategory("ob1_g5_fallback_to_xdrip", "ob1_options");
            //  removePreferenceFromCategory("always_unbond_G5", "ob1_options");
+           //  removePreferenceFromCategory("always_get_new_keys", "ob1_options");
+           // removePreferenceFromCategory("run_ble_scan_constantly", "ob1_options");
+           // removePreferenceFromCategory("run_G5_ble_tasks_on_uithread", "ob1_options");
        }
 
        private void removePreferenceFromCategory(final String preference, final String category) {
@@ -2782,6 +2910,16 @@ public class Preferences extends BasePreferenceActivity implements SearchPrefere
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     new AndroidBarcode(getActivity()).scan();
+                    return true;
+                }
+            });
+        }
+
+        private void setupQrFromFile() {
+            findPreference("qr_code_from_file").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) { // Listener for scanning QR code from file
+                    new QrCodeFromFile(getActivity()).scanFile();
                     return true;
                 }
             });

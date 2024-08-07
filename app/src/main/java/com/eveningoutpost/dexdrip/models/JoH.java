@@ -44,11 +44,13 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.CursorLoader;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.app.NotificationCompat;
+import androidx.loader.content.CursorLoader;
+
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Base64;
@@ -807,14 +809,18 @@ public class JoH {
     }
 
 
-    public static String niceTimeScalarNatural(long t) {
+    public static String niceTimeScalarNatural(long t) { // Shows the integer part only when less than 1 day.
+        return niceTimeScalarNatural(t, 0);
+    }
+
+    public static String niceTimeScalarNatural(long t, int h_digits) { // Rounds down to the defined number of decimal points when less than 1 day.
         if (t > 3000000) t = t + 10000; // round up by 10 seconds if nearly an hour
         if ((t > Constants.DAY_IN_MS) && (t < Constants.WEEK_IN_MS * 2)) {
             final SimpleDateFormat df = new SimpleDateFormat("EEEE", Locale.getDefault());
             final String day = df.format(new Date(JoH.tsl() + t));
             return ((t > Constants.WEEK_IN_MS) ? "next " : "") + day;
         } else {
-            return niceTimeScalar(t);
+            return niceTimeScalar(t, h_digits);
         }
     }
 
@@ -1721,10 +1727,13 @@ public class JoH {
     public synchronized static void setBluetoothEnabled(Context context, boolean state) {
         try {
 
-            if (isAirplaneModeEnabled(context)) {
+           /*
+           // bluetooth is usually allowed on airplanes these days afaik
+                if (isAirplaneModeEnabled(context)) {
                 UserError.Log.e(TAG, "Not setting bluetooth to state: " + state + " due to airplane mode being enabled");
                 return;
             }
+            */
 
             if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
 
@@ -1874,6 +1883,17 @@ public class JoH {
         final byte[] newBytes = new byte[length];
         System.arraycopy(source, start, newBytes, 0, length);
         return newBytes;
+    }
+
+    public static byte[] joinBytes(final byte[] first, final byte[] second) {
+        if (first == null || second == null) {
+            throw new IllegalArgumentException("Input arrays cannot be null");
+        }
+        final int totalLength = first.length + second.length;
+        final byte[] result = new byte[totalLength];
+        System.arraycopy(first, 0, result, 0, first.length);
+        System.arraycopy(second, 0, result, first.length, second.length);
+        return result;
     }
 
 

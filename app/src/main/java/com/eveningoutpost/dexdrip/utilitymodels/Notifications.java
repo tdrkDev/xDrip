@@ -20,8 +20,8 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import android.text.SpannableString;
 import android.widget.RemoteViews;
 
@@ -651,6 +651,8 @@ public class Notifications extends IntentService {
         if (lastReading != null) {
 
             b.setWhen(lastReading.timestamp);
+            b.setShowWhen(true);
+
             final SpannableString deltaString = new SpannableString("Delta: " + ((dg != null) ? (dg.spannableString(dg.unitized_delta + (dg.from_plugin ? " "+context.getString(R.string.p_in_circle) : "")))
                     : bgGraphBuilder.unitizedDeltaString(true, true)));
 
@@ -910,10 +912,10 @@ public class Notifications extends IntentService {
     }
 
     public static void RisingAlert(Context context, boolean on) {
-        RiseDropAlert(context, on, "bg_rise_alert", "bg rising fast" + "  (@" + JoH.hourMinuteString() + ")", riseAlertNotificationId);
+        RiseDropAlert(context, on, "bg_rise_alert", context.getString(R.string.bg_rising_fast) + "  (@" + JoH.hourMinuteString() + ")", riseAlertNotificationId);
     }
     public static void DropAlert(Context context, boolean on) {
-        RiseDropAlert(context, on, "bg_fall_alert", "bg falling fast" + "  (@" + JoH.hourMinuteString() + ")", failAlertNotificationId);
+        RiseDropAlert(context, on, "bg_fall_alert", context.getString(R.string.bg_falling_fast) + "  (@" + JoH.hourMinuteString() + ")", failAlertNotificationId);
     }
 
     public static void lowPredictAlert(Context context, boolean on, String msg) {

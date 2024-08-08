@@ -106,7 +106,7 @@ public class StopSensor extends ActivityWithMenu {
         }
 
         public void stopSensorClick() {
-            String confirm = gs(R.string.are_you_sure);
+            String confirm = gs(R.string.sensor_stop_confirm);
             if (!resettableCals()) { // Dexcom G6 Firefly or G7
                 confirm = gs(R.string.sensor_stop_confirm_norestart);
                 if (shortTxId()) { // Dexcom G7

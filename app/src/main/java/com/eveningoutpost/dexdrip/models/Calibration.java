@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
@@ -143,7 +143,7 @@ class Li2AppParameters extends SlopeParameters {
 
     @Override
     public double restrictIntercept(double intercept) {
-        return Math.min(Math.max(intercept, -40), 20);
+        return Math.min(Math.max(intercept, -60), 60);
     }
 }
 

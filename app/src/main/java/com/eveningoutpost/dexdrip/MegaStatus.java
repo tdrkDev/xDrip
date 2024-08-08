@@ -15,8 +15,7 @@ import static com.eveningoutpost.dexdrip.utils.DexCollectionType.WebFollow;
 import static com.eveningoutpost.dexdrip.utils.DexCollectionType.CLFollow;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,9 +23,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -116,7 +119,7 @@ public class MegaStatus extends ActivityWithMenu {
     }
 
     private static final String G4_STATUS = "BT Device";
-    public static final String G5_STATUS = "G5/G6/G7 Status";
+    public static final String G5_STATUS = "Dex Status";
     private static final String MEDTRUM_STATUS = "Medtrum Status";
     private static final String IP_COLLECTOR = "IP Collector";
     private static final String XDRIP_PLUS_SYNC = "Followers";
@@ -165,7 +168,7 @@ public class MegaStatus extends ActivityWithMenu {
             }
             if (dexCollectionType.equals(DexcomG5)) {
                 if (Pref.getBooleanDefaultFalse(Ob1G5CollectionService.OB1G5_PREFS)) {
-                    addAsection(G5_STATUS, "OB1 G5/G6/G7 Collector and Transmitter Status");
+                    addAsection(G5_STATUS, "G6/Dex1/G7/1+ Collector/Transmitter Status");
                 } else {
                     addAsection(G5_STATUS, "G5 Collector and Transmitter Status");
                 }
@@ -301,7 +304,7 @@ public class MegaStatus extends ActivityWithMenu {
         sectionTitles.clear();
         populateSectionList();
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);

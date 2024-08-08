@@ -9,8 +9,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+
 
 import com.eveningoutpost.dexdrip.BuildConfig;
 import com.eveningoutpost.dexdrip.Home;
@@ -171,7 +173,7 @@ public class CompatibleApps extends BroadcastReceiver {
 
     public static void showNotification(String title, String content, PendingIntent yesIntent, PendingIntent noIntent, PendingIntent contentIntent, int notificationId) {
 
-        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(xdrip.getAppContext(), null)
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(xdrip.getAppContext(), (String)null)
                 .setSmallIcon(R.drawable.ic_action_communication_invert_colors_on)
                 .setContentTitle(title)
                 .setContentText(content)

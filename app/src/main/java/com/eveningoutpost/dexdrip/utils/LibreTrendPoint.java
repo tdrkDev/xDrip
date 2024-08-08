@@ -41,7 +41,10 @@ public class LibreTrendPoint {
             ret = false;
         }
         if(ret) {
-            Log.e(TAG, "LibreTrendPoint.isError returning " + ret + " " + toString());
+            // Don't check point to make libre1 (after re-init, with discharged battery) work
+            //Log.e(TAG, "LibreTrendPoint.isError returning " + ret + " " + toString());
+            Log.e(TAG, "LibreTrendPoint.isError is " + ret + " but always returning false " + toString());
+            return false;
         }
         return ret;
     }

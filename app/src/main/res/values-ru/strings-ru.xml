@@ -37,6 +37,10 @@
     <string name="pref_header_cloud_storage">Облачное хранилище</string>
     <string name="auto_configure_title">Автонастройка</string>
     <string name="prefs_auto_config_summary">Автонастройка с использованием штрих-кода.</string>
+    <string name="auto_config_cam_title">Камера</string>
+    <string name="auto_config_cam_summary">Сканировать QR-код телефоном (рекомендовано)</string>
+    <string name="auto_config_image_title">Файл изображения</string>
+    <string name="auto_config_image_summary">Вы можете сохранить QR-код как файл изображения (как .png или .jpeg) на телефон. Затем используйте эту опцию, чтобы сканировать QR-код из сохраненного файла.</string>
     <string name="scan_share2_barcode">Сканировать штрих-код Share</string>
     <string name="pref_share2_scan_barcode_summary">Или сканируйте штрих-код на ресивере Share</string>
     <!-- MongoDB Settings -->
@@ -115,6 +119,7 @@
     <string name="title_activity_update">Доступны обновления для xDrip+</string>
     <string name="title_activity_display_qrcode">Поделиться настройками через QR-код</string>
     <string name="title_activity_send_feed_back">Отправить отзыв Jamorham</string>
+    <string name="title_activity_save_logs">Сохранить логи</string>
     <string name="title_activity_maps">Карта Parakeet</string>
     <string name="title_activity_display_preferences">Отображение настроек</string>
     <string name="export_submenu">Функции импорта/экспорта</string>
@@ -394,7 +399,9 @@
     <string name="please_enter_your_question_or_comments_here">Пожалуйста, введите ваш вопрос или комментарии здесь.\n\nЕсли вы предоставите Email-адрес, вы сможете получить ответ.\n\n</string>
     <string name="optional_contact_info_here_eg_email">Необязательные контактные данные здесь, напр. Email</string>
     <string name="send_message">Отправить сообщение</string>
+    <string name="save_logs">Сохранить журналы</string>
     <string name="please_indicate_what_you_think_of_the_app_generally">Пожалуйста, укажите, что вы думаете о приложении в целом</string>
+    <string name="log_confidential_note">Предупреждение!\nЖурналы могут содержать конфиденциальную информацию, такую как пароли или ID пользователей.</string>
     <string name="preferences_saved_in_sdcard_downloads">Настройки сохранены в SD card/Загрузки</string>
     <string name="could_not_write_to_sdcard_check_perms">Невозможно записать на SD card - проверить разрешения?</string>
     <string name="loaded_preferences_restarting">Загружены настройки! - Перезапуск</string>
@@ -601,7 +608,7 @@
     <string name="turn_bluetooth_on">Включать Bluetooth</string>
     <string name="reset_bluetooth">Перезагрузить Bluetooth, выключив и включив его, если мы ничего не получаем 20 минут</string>
     <string name="bluetooth_watchdog">Bluetooth Watchdog</string>
-    <string name="reset_bluetooth_g5">Перезагружать Bluetooth, выключая и включая его, чтобы обеспечить работу источника данных G5. Без этого коллектор G5 может перестать работать.</string>
+    <string name="reset_bluetooth_g5">Перезагружать Bluetooth, выключая и включая его, чтобы обеспечить работу источника данных. Без этого коллектор Dex может перестать работать.</string>
     <string name="g5_bluetooth_watchdog">Dex Bluetooth Watchdog</string>
     <string name="close_gatt">Если Bluetooth watchdog часто активируется, вы можете попробовать отключить эту настройку, чтобы посмотреть, поможет ли это</string>
     <string name="older_bluetooth_wakelocks">Старые блокировки сна Bluetooth, которые могут тратить больше батареи, но могут быть необходимы для приема Bluetooth</string>
@@ -655,7 +662,7 @@
     <string name="show_total_insulin">Показывать общий инсулин из терапии</string>
     <string name="total_insulin">Всего инсулина</string>
     <string name="received_readings_percentage">Процент полученных показаний сенсора</string>
-    <string name="received_realtime_readings_percentage">Процент полученных в реальном времени показаний сенсора (не восстановленных из памяти). ТОЛЬКО нативный режим G5</string>
+    <string name="received_realtime_readings_percentage">Процент полученных в реальном времени показаний сенсора (не восстановленных из памяти). ТОЛЬКО нативный режим Dex</string>
     <string name="capture_percentage">Процент захвата пакетов</string>
     <string name="realtime_capture_percentage">Процент записи пакетов в реальном времени</string>
     <string name="show_calibration_accuracy">Показывать оценку точности калибровки за последние 3 дня</string>
@@ -699,7 +706,7 @@
     <string name="advanced_g5_settings">Продвинутые настройки G5 для редких ситуаций</string>
     <string name="g5_debug_settings">Настройки отладки G5/G6/Dex1</string>
     <string name="g5_scan_constantly">Некоторые устройства лучше работают, когда сканируют постоянно, некоторые – нет. Если считывание работает, когда эта настройка не выбрана, у вас улучшится продолжительность работы от батареи. Обычно лучше держать это отключенным</string>
-    <string name="scan_for_g5_constantly">Искать G5 постоянно</string>
+    <string name="scan_for_g5_constantly">Искать Dex постоянно</string>
     <string name="g5_force_ui_thread">Это критично для некоторых Android-устройств, чтобы правильно подключиться, но может вызывать пропущенные показания, когда используются другие интенсивные UI-активности.</string>
     <string name="force_g5_ui_thread">Принудительно G5 в поток UI</string>
     <string name="authentificate_before_reading">Аутентификация перед каждым считыванием</string>
@@ -860,17 +867,8 @@
     <string name="bridge_battery_dropped_to">Заряд трансмиттера снизился до:</string>
     <string name="sensor_will_expire_in">Сенсор закончится через</string>
     <string name="sensor_expiring">Сенсор заканчивается</string>
-    <string name="audio_focus">Audio Focus</string>
-    <string name="choose_what_to_do_with_other_apps_audio">Выберите, что делать с другими приложениями во время тревог и изменения уровней громкости системы</string>
     <string name="wake_screen">Включать экран</string>
     <string name="wake_up_screen_during_alerts">Включать экран во время тревог. Может разблокировать устройства с выключенной блокировкой экрана.</string>
-    <string name="use_camera_light">Использовать вспышку камеры</string>
-    <string name="flash_camera_light_during_alerts">Мигать вспышкой камеры во время тревог, когда подключено к зарядке</string>
-    <string name="enable_missed_reading_alert">Включить тревогу о пропущенных показаниях</string>
-    <string name="alert_if_no_data_received_in">Тревога, если показания не поступают в течение:</string>
-    <string name="wait_before_raising_the_same_alert">Ждать до запуска той же тревоги после откладывания:</string>
-    <string name="reraise_alerts_before_snooze_time">Перезапускать тревогу, пока не отложена</string>
-    <string name="alert_reraise_time_colon">Время до перезапуска тревоги:</string>
     <string name="reminders">Напоминания</string>
     <string name="error">ошибка</string>
     <string name="install_text_to_speech_data_question">Установить данные текста-в-речь?</string>
@@ -1180,9 +1178,12 @@
     <string name="overwrite_intercept_engineering_only">Перезаписать Intercept (только инженерный режим!)</string>
     <string name="manual_overwrite_not_possible">Ручная перезапись невозможна!</string>
     <string name="upload_even_when_using_mobile_data">Отправлять даже при использовании мобильных данных</string>
+    <string name="daily_backup_even_mobile">Ежедневное резервное копирование даже через мобильные данные</string>
     <string name="use_mobile_data">Использовать мобильные данные</string>
     <string name="summary_cloud_storage_api_download_enable">Также пытаться загружать события терапии из Nightscout</string>
     <string name="title_cloud_storage_api_download_enable">Загружать терапию</string>
+    <string name="title_cloud_storage_api_download_from_xdrip">Пропускать записи из xDrip+</string>
+    <string name="summary_cloud_storage_api_download_from_xdrip">Избегать загрузку записей, которые были отправлены xDrip+</string>
     <string name="summary_bluetooth_meter_for_calibrations_auto">Калибровать, используя новые измерения глюкозы крови, если условия выглядят подходящими для этого, без подтверждения (экспериментально)</string>
     <string name="title_bluetooth_meter_for_calibrations_auto">Автоматическая калибровка</string>
     <string name="title_rest_api_extra_options">Дополнительные настройки</string>
@@ -1258,6 +1259,8 @@
     <string name="title_miband_send_readings_as_notification">Показания ГК как уведомление</string>
     <string name="summary_miband_send_readings_as_notification">Будет использовать уведомления для отправки показаний ГК. Дата не будет меняться, поэтому все функции браслета можно использовать. Нужно выключить, если вы хотите использовать циферблат xDrip (необходимо удалить официальное приложение Mi Fit, чтобы предотвратить перезапись даты)</string>
     <string name="title_miband_vibrate_on_readings">Вибрировать при показаниях</string>
+    <string name="title_miband_send_calls">Отправлять вызовы</string>
+    <string name="summary_miband_send_calls">Отправлять уведомления о вызовах на Mi Band (Android 6+)</string>
     <string name="title_miband_graph_category">Настройки графика</string>
     <string name="title_miband_graph_enable">Включить график</string>
     <string name="title_miband_graph_treatment_enable">Показывать болюсы</string>
@@ -1312,16 +1315,23 @@
     <string name="title_nsfollow_url">URL Nightscout-источника</string>
     <string name="summary_nsfollow_download_treatments">Также загружать события терапии из Nightscout как фолловер</string>
     <string name="title_nsfollow_download_treatments">Загружать события терапии</string>
+    <string name="title_nsfollow_lag">Задержка загрузки из Nightscout</string>
+    <!-- Maybe we can use them later?
     <string name="title_clfollow_user">Имя пользователя CareLink</string>
     <string name="summary_clfollow_user">Имя пользователя аккаунта CareLink</string>
     <string name="title_clfollow_pass">Пароль CareLink</string>
     <string name="summary_clfollow_pass">Пароль аккаунта CareLink</string>
+    !-->
     <string name="title_clfollow_country">Страна CareLink</string>
     <string name="summary_clfollow_country">Выберите вашу страну CareLink.</string>
     <string name="title_clfollow_patient">Имя пользователя пациента CareLink</string>
     <string name="summary_clfollow_patient">Имя пользователя пациента CareLink (необязательно)</string>
+    <!-- Maybe we can use them later?
     <string name="title_clfollow_lang">Язык CareLink</string>
     <string name="summary_clfollow_lang">Код языка CareLink</string>
+    -->
+    <string name="title_clfollow_login">Вход</string>
+    <string name="summary_clfollow_login">Войти в браузере</string>
     <string name="title_clfollow_grace_period">Пробный период</string>
     <string name="summary_clfollow_grace_period">Пробный период для запросов в секундах</string>
     <string name="title_clfollow_missed_poll_interval">Интервал опроса пропущенных данных</string>
@@ -1402,6 +1412,17 @@
     <string name="title_use_number_icon_large">Использовать большую иконку числа</string>
     <string name="summary_number_icon_large_arrow">Показывает стрелку тренда на большой иконке</string>
     <string name="title_number_icon_large_arrow">Показывать стрелку на большой иконке</string>
+    <string name="title_xdrip_plus_accessibility">Настройки Always On Display</string>
+    <string name="summary_aod_use_top">Использовать верхние 20% экрана для виджета AOD</string>
+    <string name="title_aod_use_top">Использовать верх</string>
+    <string name="summary_aod_use_top_center">Использовать вторые 20% экрана для виджета AOD</string>
+    <string name="title_aod_use_top_center">Использовать верх-центр</string>
+    <string name="summary_aod_use_center">Использовать третьи 20% экрана для виджета AOD</string>
+    <string name="title_aod_use_center">Использовать центр</string>
+    <string name="summary_aod_use_center_bottom">Использовать четвертые 20% экрана для виджета AOD</string>
+    <string name="title_aod_use_center_bottom">Использовать низ-центр</string>
+    <string name="summary_aod_use_bottom">Использовать нижние 20% экрана для виджета AOD</string>
+    <string name="title_aod_use_bottom">Использовать низ</string>
     <string name="summary_show_home_on_boot">Показывать экран xDrip автоматически после запуска устройства</string>
     <string name="title_show_home_on_boot">Показывать xDrip при включении</string>
     <string name="eula">EULA</string>
@@ -1448,6 +1469,9 @@
     <string name="title_notification_channels_grouping">Группировать уведомления вместе</string>
     <string name="summary_delay_ascending_3min">Для профиля возрастающей громкости задерживать начало звука тревоги на 3 мин. Вибрация (если включена) начнется сразу при срабатывании тревоги вне зависимости от этой настройки.</string>
     <string name="title_delay_ascending_3min">Задержать возрастание громкости</string>
+    <string name="title_ascending_volume">Настройки повышающейся громкости</string>
+    <string name="summary_ascending_volume_to_medium">Когда включено, профиль повышающейся громкости будет повышать ее до среднего вместо максимального уровня</string>
+    <string name="title_ascending_volume_to_medium">Повышать до среднего</string>
     <string name="summary_play_sound_for_initial_calibration">Проигрывать звук, когда запрошена начальная калибровка</string>
     <string name="title_play_sound_for_initial_calibration">Уведомление о начальной</string>
     <string name="category_noisy_readings">Шумные значения</string>
@@ -1517,6 +1541,8 @@
     <string name="change_settings">Изменить настройки</string>
     <string name="do_you_want_to_delete_and_reset_the_calibrations_for_this_sensor">Вы действительно хотите удалить и сбросить калибровки для этого сенсора?</string>
     <string name="sensor_stop_confirm">Вы действительно хотите остановить сенсор?</string>
+    <string name="sensor_stop_confirm_norestart">Вы не сможете просто перезапустить сенсор.</string>
+    <string name="sensor_stop_confirm_really_norestart">ВНИМАНИЕ!\n\nВы не сможете перезапустить сенсор!</string>
     <string name="you_have_an_old_experimental_glucose_prediction_setting_enabled__this_is_not_recommended_and_could_mess_things_up_badly__shall_i_disable_this_for_you">У вас включена настройка старых экспериментальных предсказаний глюкозы.\n\nЭто НЕ РЕКОМЕНДУЕТСЯ и может сильно все испортить.\n\nДолжен ли я отключить это для вас?</string>
     <string name="settings_issue">Проблема с настройками!</string>
     <string name="do_you_want_to_use_this_synced_fingerstick_blood_glucose_result_to_calibrate_with__you_can_change_when_this_dialog_is_displayed_in_settings">Вы действительно хотите использовать этот синхронизированный результат измерения ГК  для калибровки?\n\n(вы можете выбрать, когда появляется этот диалог, в Настройках)</string>
@@ -1749,6 +1775,7 @@
     <string name="reduce_battery_and_network_overhead">Уменьшить нагрузку на батарею и сеть, используя пакетную обработку и исключая ненужные данные</string>
     <string name="simplify_graphs_by_smoothing_out_irregularities">Упростить графики, сглаживая неровности</string>
     <string name="graph_smoothing">Сглаживание графика</string>
+    <string name="enable_graph_smoothing">Включить</string>
     <string name="last_reading">Последнее показание</string>
     <string name="select_file_for_alert">Выбрать файл для уведомлений</string>
     <string name="cannot_choose_file_without_permission">Невозможно установить звук без разрешения на доступ к хранилищу</string>
@@ -1802,6 +1829,7 @@
     <string name="cloud_backup">Облачное резервное копирование</string>
     <string name="select_automatic_or_select_alternate">Выберите Автоматически, чтобы xDrip управлял файлами на Google Диске, или выберите Альтернативный файл, если вам нужно восстановление из другого места.</string>
     <string name="restoring_backup_will_erase_warning">Восстановление из резервной копии сотрет ваши текущие настройки и данные и восстановит их содержащимися в резервной копии.\n\nВы абсолютно уверены, что хотите это сделать?</string>
+    <string name="you_cannot_undo_delete_alert">Вы не сможете отменить это!\n\nВы уверены, что действительно хотите удалить эту тревогу?</string>
     <string name="this_backup_looks_like_came_from_different_format_string">Похоже, эта резервная копия пришла с другого устройства:\n%s\nВы уверены, что хотите восстановиться из этой резервной копии?</string>
     <string name="megabyte_format_string">%.1f МБ</string>
     <string name="manual_selection_google_drive_file_warning">Вы выбрали файл с Google Диска, но он не автоматически управляется xDrip, поэтому он может быть использован только для ручных резервных копий и восстановления.\n\nАвтоматического резервного копирования с этим файлом не будет.\n\nПродолжить?</string>
@@ -1854,4 +1882,46 @@
     <string name="summary_Lib2_show_sense_on_status">Включите, чтобы показывать дополнительную информацию в Состоянии системы для сенсора Libre 2.</string>
     <string name="import_qr_code_warning">Импортируйте настройки только из источников, которым вы доверяете!\n\nПожалуйста, подтвердите импорт этих настроек:\n\n</string>
     <string name="scan_to_load_xdrip_settings">Сканируйте для загрузки настроек xDrip+</string>
+    <string name="manage_permissions">Управление разрешениями</string>
+    <string name="open_health_connect_settings_to_manually_manage_permissions">Откройте настройки Health Connect для управления разрешениями вручную</string>
+    <string name="send_data_to_health_connect">Отправлять данные в Health Connect</string>
+    <string name="get_data_from_health_connect">Получать данные из Health Connect</string>
+    <string name="requires_android_8_and_google_companion_application_or_android_14">Требует Android 8+ с приложением-компаньоном Google либо Android 14+</string>
+    <string name="send_and_receive_data_from_google_health_connect_and_google_fit">Отправлять и получать данные Google Health Connect и Google Fit</string>
+    <string name="google_health_connect">Google Health Connect</string>
+    <string name="google_health_connect_needs_perms">ОШИБКА: Health Connect требует дополнительные разрешения! - Попробуйте снова из меню настроек</string>
+    <string name="carelink_auth_country_required">Необходимо указать страну!</string>
+    <string name="carelink_auth_status_authenticated">Состояние авторизован!</string>
+    <string name="carelink_auth_status_not_authenticated">Состояние не авторизован!</string>
+    <string name="carelink_auth_login_in_progress">Идет вход...</string>
+    <string name="carelink_refresh_token_start">Начало обновления доступа</string>
+    <string name="carelink_refresh_token_failed">Ошибка обновления доступа! Будет новая попытка!</string>
+    <string name="carelink_download_start">Начать загрузку</string>
+    <string name="carelink_download_failed">Ошибка загрузки данных!</string>
+    <string name="carelink_credential_status_not_authenticated">Вход не выполнен! Пожалуйста, войдите!</string>
+    <string name="carelink_credential_status_access_expired">Срок доступа закончился! Будет обновлен!</string>
+    <string name="carelink_credential_status_refresh_expired">Время входа закончилось! Пожалуйста, войдите!</string>
+    <string name="data_source">Источник данных:</string>
+    <string name="disable_collection">Сбор отключен</string>
+    <string name="insulin_pens">Шприц-ручки</string>
+    <string name="editing">Правка</string>
+    <string name="enable_missed_reading_alert">Включить тревогу о пропущенных показаниях</string>
+    <string name="alert_if_no_data_received_in_colon">Тревога, если показания не поступают в течение:</string>
+    <string name="wait_before_raising_the_same_alert_after_snooze_colon">Ждать до запуска той же тревоги после откладывания:</string>
+    <string name="reraise_alerts_before_snooze_time">Перезапускать тревогу, пока не отложена</string>
+    <string name="alert_reraise_time_colon">Время до перезапуска тревоги:</string>
+    <string name="select_start_time">Выберите время начала</string>
+    <string name="select_end_time">Выберите время окончания</string>
+    <string name="accept_glucose">Принимать ГК</string>
+    <string name="process_glucose_data_received">Принимать данные ГК, полученные от приложения NSClient</string>
+    <string name="use_health_connect">Использовать Health Connect</string>
+    <string name="audio_focus">Фокус звука</string>
+    <string name="audio_focus_summary">Выберите, что делать с другими приложениями во время тревог и изменения уровней громкости системы</string>
+    <string name="audio_focus_dont_adjust_other_app_sounds">Не менять звук других приложений</string>
+    <string name="audio_focus_lower_volume_of_other_apps">Снизить громкость других приложений</string>
+    <string name="audio_focus_pause_other_apps_playing_audio">Поставить на паузу звуки других приложений</string>
+    <string name="audio_focus_pause_all_other_sounds">Поставить на паузу все звуки</string>
+    <string name="use_camera_light">Использовать вспышку камеры</string>
+    <string name="use_camera_light_summary">Мигать вспышкой камеры во время тревог, когда подключено к зарядке</string>
+    <string name="g7_should_start_automatically">G7 должен запускаться автоматически</string>
 </resources>

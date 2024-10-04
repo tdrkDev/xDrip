@@ -1431,6 +1431,7 @@
     <string name="summary_plus_accept_follower_actions">События терапии, калибровки и другие действия от фолловеров будут приняты</string>
     <string name="title_plus_accept_follower_actions">Принимать действия фолловера</string>
     <string name="summary_plus_whole_house">Участвовать в сети всего дома</string>
+    <string name="summary_plus_xdrip_cloud">Использовать новые серверы xDrip+ cloud. Эта настройка должна совпадать на всех мастерах и фолловерах.</string>
     <string name="title_plus_whole_house">Весь дом</string>
     <string name="summary_libre_whole_house_collector">Это устройство будет коллектором сети всего дома</string>
     <string name="title_libre_whole_house_collector">Libre по всему дому</string>
@@ -1774,6 +1775,7 @@
     <string name="proceed">Продолжить</string>
     <string name="special_pairing_workaround">Специальный обходной путь сопряжения</string>
     <string name="save_power">Экономить энергию</string>
+    <string name="use_xdrip_cloud">Исп. xDrip Cloud</string>
     <string name="reduce_battery_and_network_overhead">Уменьшить нагрузку на батарею и сеть, используя пакетную обработку и исключая ненужные данные</string>
     <string name="simplify_graphs_by_smoothing_out_irregularities">Упростить графики, сглаживая неровности</string>
     <string name="graph_smoothing">Сглаживание графика</string>

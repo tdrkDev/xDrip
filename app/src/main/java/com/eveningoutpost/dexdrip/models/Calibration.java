@@ -807,7 +807,11 @@ public class Calibration extends Model {
     private static SlopeParameters getSlopeParameters() {
 
         if (CollectionServiceStarter.isLibre2App((Context)null)) {
-            return new Li2AppParameters();
+            if (Pref.getBooleanDefaultFalse("use_non_fixed_li_patched_parameters")){
+                return new LiParametersNonFixed();
+            } else {
+                return new Li2AppParameters();
+            }
         }
 
         if (CollectionServiceStarter.isLimitter()) {

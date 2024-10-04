@@ -1075,6 +1075,8 @@
     <string name="title_Double_Calibrations">Double Calibrations</string>
     <string name="summary_Enable_to_allow_variable_slopes_with_Libre_collection_methods">Enable to allow variable slopes with Libre collection methods</string>
     <string name="title_Non_fixed_Libre_slopes">Non-fixed Libre slopes</string>
+    <string name="summary_Enable_to_allow_variable_slopes_with_Libre_patched_collection_methods">Enable to allow variable slopes with Libre (patched app) collection method</string>
+    <string name="title_Non_fixed_Libre_patched_slopes">Non-fixed Libre (patched app) slopes</string>
     <string name="summary_Allow_initial_calibration_no_good_enough_data">Allow initial calibration even if we don\'t have good enough data. Beware could result in inaccurate calibration!</string>
     <string name="title_Bypass_quality_check">Bypass quality check</string>
     <string name="summary_Scan_before_connecting_on_xBridge_and_Libre_bluetooth">Scan before connecting on xBridge and Libre Bluetooth</string>

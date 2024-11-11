@@ -180,11 +180,11 @@ public class CollectionServiceStarter {
 
     public static boolean isBTPoctech(Context context) {
         String collection_method = Pref.getString("dex_collection_method", "BluetoothWixel");
-        return collection_method.equals("DexcomG5");
+        return collection_method.equals("PoctechCT14");
     }
 
-    private static boolean isBTG5(String collection_method) {
-        return collection_method.equals("DexcomG5");
+    private static boolean isBTPoctech(String collection_method) {
+        return collection_method.equals("PoctechCT14");
     }
 
     public static boolean isWifiWixel(Context context) {
@@ -314,6 +314,25 @@ public class CollectionServiceStarter {
                 }
             } else {
                 startBtG5Service();
+            }
+
+        } else if (isBTPoctech(collection_method)) {
+            Log.d(TAG, "Starting Poctech collector");
+            stopBtWixelService();
+            stopWifWixelThread();
+            stopBtShareService();
+
+            if (prefs.getBoolean("wear_sync", false)) {//KS
+                boolean enable_wearG5 = prefs.getBoolean("enable_wearG5", false);
+                boolean force_wearG5 = prefs.getBoolean("force_wearG5", false);
+                startServiceCompat(new Intent(context, WatchUpdaterService.class));
+                if (!enable_wearG5 || (enable_wearG5 && !force_wearG5)) { //don't start if Wear G5 Collector Service is active
+                    startBtPoctechService();
+                } else {
+                    Log.d(TAG, "Not starting because of force wear");
+                }
+            } else {
+                startBtPoctechService();
             }
 
         } else if (isWifiandBTWixel(context) || isWifiandDexBridge() || isWifiandBTLibre(context)) {

@@ -30,9 +30,13 @@ import com.eveningoutpost.dexdrip.utilitymodels.CollectionServiceStarter;
 import com.eveningoutpost.dexdrip.utilitymodels.PersistentStore;
 import com.eveningoutpost.dexdrip.utilitymodels.Pref;
 import com.eveningoutpost.dexdrip.utilitymodels.RxBleProvider;
+import com.eveningoutpost.dexdrip.utilitymodels.StatusItem;
 import com.eveningoutpost.dexdrip.utils.DexCollectionType;
 import com.eveningoutpost.dexdrip.watch.thinjam.BlueJayEntry;
 import com.polidea.rxandroidble2.RxBleClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -73,7 +77,7 @@ public class PoctechCollectionService extends G5BaseService {
 
     private static RxBleClient rxBleClient;
 
-    private static volatile String static_connection_state = null;
+//    private static volatile String static_connection_state = null;
 
     public enum STATE {
         INIT("Initializing"),
@@ -180,25 +184,25 @@ public class PoctechCollectionService extends G5BaseService {
             if (android_wear && wear_broadcast) {
                 msg(new_state.toString());
             }
-            background_automata(timeout);
+//            background_automata(timeout);
         }
     }
 
-    public synchronized void background_automata(final int timeout) {
-        UserError.Log.d(TAG, "Метод 3");
-        if (background_launch_waiting) {
-            UserError.Log.d(TAG, "Blocked by existing background automata pending");
-            return;
-        }
-        final PowerManager.WakeLock wl = JoH.getWakeLock("jam-g5-background", timeout + 5000);
-        background_launch_waiting = true;
-        new Thread(() -> {
-            JoH.threadSleep(timeout);
-            background_launch_waiting = false;
-            automata();
-            JoH.releaseWakeLock(wl);
-        }).start();
-    }
+//    public synchronized void background_automata(final int timeout) {
+//        UserError.Log.d(TAG, "Метод 3");
+//        if (background_launch_waiting) {
+//            UserError.Log.d(TAG, "Blocked by existing background automata pending");
+//            return;
+//        }
+//        final PowerManager.WakeLock wl = JoH.getWakeLock("jam-g5-background", timeout + 5000);
+//        background_launch_waiting = true;
+//        new Thread(() -> {
+//            JoH.threadSleep(timeout);
+//            background_launch_waiting = false;
+//            automata();
+//            JoH.releaseWakeLock(wl);
+//        }).start();
+//    }
 
     private static boolean shouldServiceRun() {
         UserError.Log.d(TAG, "Метод 7");
@@ -233,4 +237,11 @@ public class PoctechCollectionService extends G5BaseService {
         return "Dexcom" + transmitterIdLastTwo;
     }
 
+    public static List<StatusItem> megaStatus() {
+        UserError.Log.d(TAG, "Метод 11");
+        final List<StatusItem> l = new ArrayList<>();
+        final String tx_id = Pref.getStringDefaultBlank("poct_txid");
+        l.add(new StatusItem("Transmitter ID", tx_id));
+        return  l;
+    }
 }

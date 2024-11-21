@@ -75,10 +75,14 @@ public class PoctechCollectionService extends G5BaseService {
     private static volatile String transmitterID;
     private static volatile String transmitterMAC;
 
+    private final Object mLock = new Object();
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
     private boolean scanning = false;
     private Handler handler = new Handler();
+    private BluetoothGatt mGatt;
+    public int max133RetryCounter = 0;
+    private static final boolean delayOn133Errors = true; // add some delays with 133 errors
 
 
 
@@ -126,9 +130,84 @@ public class PoctechCollectionService extends G5BaseService {
     private final ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
+            UserError.Log.d(TAG, "Вызов скана");
             super.onScanResult(callbackType, result);
             BluetoothDevice device = result.getDevice();
-            UserError.Log.d(TAG, "Найдено устройство: " + device.getName() + ", Адрес: " + device.getAddress());
+            if (device.getName() != null && device.getName().equals(getTransmitterID())){
+                UserError.Log.d(TAG, "Найдено устройство: " + device.getName() + ", Адрес: " + device.getAddress());
+                stopScanning();
+                connectToDevice(device);
+            } else {
+                UserError.Log.d(TAG, "Не нашёл твой трансмиттер");
+            }
+        }
+
+        private synchronized void connectToDevice(BluetoothDevice device) {
+            if (JoH.ratelimit("G5connect-rate", 2)) {
+
+                UserError.Log.d(TAG, "connectToDevice() start");
+                if (mGatt != null) {
+                    UserError.Log.i(TAG, "BGatt isnt null, Closing.");
+                    try {
+                        mGatt.close();
+                    } catch (NullPointerException e) {
+                        // concurrency related null pointer
+                    }
+                    mGatt = null;
+                }
+                UserError.Log.i(TAG, "Request Connect");
+                final BluetoothDevice mDevice = device;
+                if (enforceMainThread()) {
+                    Handler iHandler = new Handler(Looper.getMainLooper());
+                    iHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            connectGatt(mDevice);
+                        }
+                    });
+                } else {
+                    connectGatt(mDevice);
+                }
+
+            } else {
+                UserError.Log.d(TAG, "connectToDevice baulking due to rate-limit");
+            }
+        }
+
+        private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {};
+        private synchronized void connectGatt(BluetoothDevice mDevice) {
+            UserError.Log.i(TAG, "mGatt Null, connecting...");
+            UserError.Log.i(TAG, "connectToDevice On Main Thread? " + isOnMainThread());
+            lastState="Found, Connecting";
+            if (delayOn133Errors && max133RetryCounter > 1) {
+                // should we only be looking at disconnected 133 here?
+                UserError.Log.e(TAG, "Adding a delay before connecting to 133 count of: " + max133RetryCounter);
+                waitFor(600);
+                UserError.Log.e(TAG, "connectGatt() delay completed");
+            }
+            mGatt = mDevice.connectGatt(getApplicationContext(), false, gattCallback);
+        }
+
+
+        protected void waitFor(final int millis) {
+            synchronized (mLock) {
+                try {
+                    UserError.Log.e(TAG, "waiting " + millis + "ms");
+                    mLock.wait(millis);
+                } catch (final InterruptedException e) {
+                    UserError.Log.e(TAG, "Sleeping interrupted", e);
+                }
+            }
+        }
+
+        private boolean isOnMainThread() {
+            return Looper.getMainLooper().getThread() == Thread.currentThread();
+        }
+
+        private boolean enforceMainThread() {
+            SharedPreferences sharedPreferences =
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            return sharedPreferences.getBoolean("run_G5_ble_tasks_on_uithread", false);
         }
 
         @Override

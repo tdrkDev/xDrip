@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
@@ -174,7 +175,20 @@ public class PoctechCollectionService extends G5BaseService {
             }
         }
 
-        private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {};
+        private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+            @Override
+            public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+                if (newState == BluetoothProfile.STATE_CONNECTED) {
+                    UserError.Log.d(TAG, "Успешно подключено к устройству");
+                    // Здесь можно запустить дальнейшие действия, например, начать обмен данными
+                } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                    UserError.Log.d(TAG, "Отключено от устройства");
+                    // Обработка отключения, если необходимо
+                }
+            }
+
+        };
+
         private synchronized void connectGatt(BluetoothDevice mDevice) {
             UserError.Log.i(TAG, "mGatt Null, connecting...");
             UserError.Log.i(TAG, "connectToDevice On Main Thread? " + isOnMainThread());

@@ -34,13 +34,16 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.activeandroid.query.Select;
 import com.eveningoutpost.dexdrip.BluetoothScan;
 import com.eveningoutpost.dexdrip.R;
 import com.eveningoutpost.dexdrip.g5model.BluetoothServices;
 import com.eveningoutpost.dexdrip.g5model.Extensions;
 import com.eveningoutpost.dexdrip.g5model.Transmitter;
+import com.eveningoutpost.dexdrip.models.ActiveBluetoothDevice;
 import com.eveningoutpost.dexdrip.models.JoH;
 import com.eveningoutpost.dexdrip.models.UserError;
+import com.eveningoutpost.dexdrip.utilitymodels.Blukon;
 import com.eveningoutpost.dexdrip.utilitymodels.Pref;
 import com.eveningoutpost.dexdrip.utilitymodels.StatusItem;
 
@@ -180,6 +183,7 @@ public class PoctechCollectionService extends G5BaseService {
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
                 if (newState == BluetoothProfile.STATE_CONNECTED) {
                     UserError.Log.d(TAG, "Успешно подключено к устройству");
+                    ActiveBluetoothDevice.connected();
                     // Здесь можно запустить дальнейшие действия, например, начать обмен данными
                 } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                     UserError.Log.d(TAG, "Отключено от устройства");
@@ -193,12 +197,14 @@ public class PoctechCollectionService extends G5BaseService {
             UserError.Log.i(TAG, "mGatt Null, connecting...");
             UserError.Log.i(TAG, "connectToDevice On Main Thread? " + isOnMainThread());
             lastState="Found, Connecting";
+            setDevice(mDevice.getName(), mDevice.getAddress());
             if (delayOn133Errors && max133RetryCounter > 1) {
                 // should we only be looking at disconnected 133 here?
                 UserError.Log.e(TAG, "Adding a delay before connecting to 133 count of: " + max133RetryCounter);
                 waitFor(600);
                 UserError.Log.e(TAG, "connectGatt() delay completed");
             }
+            lastState = "Connect";
             mGatt = mDevice.connectGatt(getApplicationContext(), false, gattCallback);
         }
 
@@ -240,6 +246,26 @@ public class PoctechCollectionService extends G5BaseService {
         }
     };
 
+    public static synchronized void setDevice(String name, String address) {
+        ActiveBluetoothDevice btDevice;
+        synchronized (ActiveBluetoothDevice.table_lock) {
+            btDevice = new Select().from(ActiveBluetoothDevice.class)
+                    .orderBy("_ID desc")
+                    .executeSingle();
+        }
+        Pref.setString("last_connected_device_address", address);
+        Blukon.clearPin();
+        if (btDevice == null) {
+            ActiveBluetoothDevice newBtDevice = new ActiveBluetoothDevice();
+            newBtDevice.name = name;
+            newBtDevice.address = address;
+            newBtDevice.save();
+        } else {
+            btDevice.name = name;
+            btDevice.address = address;
+            btDevice.save();
+        }
+    }
 
     //Чтение модели трансмиттера из строки ввода в меню
     private static void init_tx_id() {
@@ -265,8 +291,11 @@ public class PoctechCollectionService extends G5BaseService {
     public static List<StatusItem> megaStatus() {
         final List<StatusItem> l = new ArrayList<>();
         l.add(new StatusItem("Phone Service State", lastState));
-        final String tx_id = Pref.getStringDefaultBlank("poct_txid");
-        l.add(new StatusItem("Transmitter ID", tx_id));
+        l.add(new StatusItem("Transmitter ID", ActiveBluetoothDevice.btDeviceName()));
+        l.add(new StatusItem("Transmitter MAC", ActiveBluetoothDevice.btDeviceAddresses()));
+        l.add(new StatusItem("Iw (nA)", "пока null"));
+        l.add(new StatusItem("Iс (nA)", "пока null"));
+        l.add(new StatusItem("Battery (V)", "пока null"));
         return  l;
     }
 
